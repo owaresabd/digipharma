@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Built-By: USER
+Build-Jdk: 15
+Implementation-Title: pms
+Implementation-Version: 1.0.0
+Implementation-Vendor-Id: com.pms
+Implementation-URL: https://projects.spring.io/spring-boot/#/spring-boot
+ -starter-parent/pms
+Main-Class: LimsApplication
+Created-By: Maven Integration for Eclipse
+

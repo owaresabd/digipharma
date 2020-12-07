@@ -1,0 +1,30 @@
+@charset "ISO-8859-1";
+
+.table-bordered th, .table-bordered td {
+	border: 1px solid #000 !important;
+}
+
+.party {
+    min-width: 225px;
+}
+
+.date {
+    min-width: 80px;
+}
+
+.wd {
+	min-width: 100px;
+}
+
+.uusa {
+	font-style: italic;
+   	font-weight: bold;
+   	text-decoration: underline;
+}
+
+@media print {
+    @page {
+        size: letter landscape;
+        margin: 5%;
+    }
+}

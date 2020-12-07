@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.pms</groupId>
+	<artifactId>pms</artifactId>
+	<version>1.0.0</version>
+	<packaging>${artifact-packaging}</packaging>
+
+	<name>${project.artifactId}</name>
+	<description>PMS :: Pharmacy Management System</description>
+
+	<developers>
+		<developer>
+			<id>owares</id>
+			<name>Md. Abdul Owares</name>
+			<email>owaresabd@gmail.com</email>
+		</developer>
+	</developers>
+
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.0.4.RELEASE</version>
+	</parent>
+
+	<properties>
+		<java.version>1.8</java.version>
+		<start-class>LimsApplication</start-class>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-jdbc</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+
+
+		<dependency>
+			<groupId>com.vividsolutions</groupId>
+			<artifactId>jts</artifactId>
+			<version>1.13</version>
+		</dependency>
+
+		<dependency>
+			<groupId>net.sf.jasperreports</groupId>
+			<artifactId>jasperreports</artifactId>
+			<version>6.5.1</version>
+		</dependency>
+		<dependency>
+			<groupId>com.lowagie</groupId>
+			<artifactId>itext</artifactId>
+			<version>2.1.7</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context-support</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.zaxxer</groupId>
+			<artifactId>HikariCP</artifactId>
+			<version>3.4.2</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.tomcat.embed</groupId>
+			<artifactId>tomcat-embed-jasper</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>jstl</groupId>
+			<artifactId>jstl</artifactId>
+			<version>1.2</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet.jsp</groupId>
+			<artifactId>javax.servlet.jsp-api</artifactId>
+			<version>2.3.1</version>
+		</dependency>
+		<dependency>
+			<groupId>de.grundid.opendatalab</groupId>
+			<artifactId>geojson-jackson</artifactId>
+			<version>1.5.1</version>
+		</dependency>
+		<dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>javax.xml.bind</groupId>
+			<artifactId>jaxb-api</artifactId>
+			<version>2.3.1</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.cache</groupId>
+			<artifactId>cache-api</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-fileupload</groupId>
+			<artifactId>commons-fileupload</artifactId>
+			<version>1.3.1</version>
+		</dependency>
+
+		<!-- Apache Commons IO -->
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>2.4</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.google.maps</groupId>
+			<artifactId>google-maps-services</artifactId>
+			<version>0.1.15</version>
+		</dependency>
+
+		<dependency>
+			<groupId>fr.opensagres.xdocreport</groupId>
+			<artifactId>org.apache.poi.xwpf.converter.xhtml</artifactId>
+			<version>1.0.0</version>
+		</dependency>
+		<dependency>
+			<groupId>fr.opensagres.xdocreport</groupId>
+			<artifactId>org.apache.poi.xwpf.converter.pdf</artifactId>
+			<version>1.0.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.documents4j</groupId>
+			<artifactId>documents4j-local</artifactId>
+			<version>1.0.3</version>
+		</dependency>
+		<dependency>
+			<groupId>com.documents4j</groupId>
+			<artifactId>documents4j-transformer-msoffice-word</artifactId>
+			<version>1.0.3</version>
+		</dependency>
+
+		<dependency>
+			<groupId>ar.com.fdvs</groupId>
+			<artifactId>DynamicJasper-core-fonts</artifactId>
+			<version>1.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.javassist</groupId>
+			<artifactId>javassist</artifactId>
+			<version>3.25.0-GA</version>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+		<finalName>${project.artifactId}</finalName>
+	</build>
+
+	<profiles>
+		<profile>
+			<id>local</id>
+			<properties>
+				<artifact-packaging>jar</artifact-packaging>
+			</properties>
+		</profile>
+		<profile>
+			<id>remote</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<properties>
+				<artifact-packaging>war	</artifact-packaging>
+			</properties>
+			<dependencies>
+				<dependency>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-starter-tomcat</artifactId>
+					<scope>provided</scope>
+				</dependency>
+			</dependencies>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.springframework.boot</groupId>
+						<artifactId>spring-boot-maven-plugin</artifactId>
+						<executions>
+							<execution>
+								<configuration>
+									<mainClass>ati.lims.LimsApplication</mainClass>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+
+
+</project>

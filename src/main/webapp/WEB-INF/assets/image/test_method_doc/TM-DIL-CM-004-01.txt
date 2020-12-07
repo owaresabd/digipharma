@@ -1,0 +1,209 @@
+CREATE TABLE EH_ATTRIBUTEXAMVALUE AS SELECT * FROM SHNIBPS_DEV01.EH_ATTRIBUTEXAMVALUE;
+CREATE TABLE EH_PAT_PE_INFO AS SELECT * FROM SHNIBPS_DEV01.EH_PAT_PE_INFO;
+
+CREATE TABLE EH_PAT_ROS_INFO AS SELECT * FROM SHNIBPS_DEV01.EH_PAT_ROS_INFO;
+
+CREATE TABLE EH_BODYPARTS AS SELECT * FROM SHNIBPS_DEV01.EH_BODYPARTS;
+CREATE TABLE EH_PATIENT_HPI AS SELECT * FROM SHNIBPS_DEV01.EH_PATIENT_HPI;
+
+CREATE TABLE EH_DSEMDC AS SELECT * FROM SHNIBPS_DEV01.EH_DSEMDC;
+
+ALTER TABLE PAT_VITALSIGN ADD ( ETCO2 NUMBER(5,2),
+                                  TEMP_SOURCE VARCHAR2(30 BYTE),
+                                  BP_HIGHER2 NUMBER(5,2),
+                                  BP_LOWER2 NUMBER(5,2),
+                                  BP_TAKEN_MODE2 VARCHAR2(30 BYTE),
+                                  BP_DELAY_VALUE2 NUMBER(5),
+                                  BP_DELAY_TYPE2 VARCHAR2(2 BYTE)
+                                  );
+                                  
+ALTER TABLE OP_APPOINTMENT ADD ( APPOINT_STATUS VARCHAR2(2 BYTE),
+                                  SC_NO VARCHAR2(16 BYTE),
+                                  FULL_NAME VARCHAR2(120 BYTE),
+                                  REASON4APP VARCHAR2(300 BYTE),
+                                  DOC_CHEMBER VARCHAR2(100 BYTE),
+                                  APP_POINT VARCHAR2(10 BYTE),
+                                  PRESCRIPTION BLOB,
+                                  PAGE_SL NUMBER
+                                  );
+ALTER TABLE OP_PATALLERGIES ADD ITEM_NAME VARCHAR2(500 BYTE);
+
+CREATE TABLE EH_BPW_LOCATION AS SELECT * FROM SHNIBPS_DEV01.EH_BPW_LOCATION;
+
+INSERT INTO EH_DISEASE  SELECT * FROM SHNIBPS_DEV01.EH_DISEASE;
+
+INSERT INTO M00_LKP SELECT * FROM SHNIBPS_DEV01.M00_LKP;
+
+INSERT INTO log_op_patallergies SELECT * FROM SHNIBPS_DEV01.log_op_patallergies;
+
+INSERT INTO op_allergyreacttype SELECT * FROM SHNIBPS_DEV01.op_allergyreacttype;
+
+CREATE TABLE EH_PAT_DISEASE_LOG AS SELECT * FROM SHNIBPS_DEV01.EH_PAT_DISEASE_LOG;
+
+CREATE TABLE EH_DSEINV AS SELECT * FROM SHNIBPS_DEV01.EH_DSEINV;
+
+CREATE TABLE EH_FOLLOWUPVISITTIME AS SELECT * FROM SHNIBPS_DEV01.EH_FOLLOWUPVISITTIME;
+
+CREATE TABLE IP_COMORBID AS SELECT * FROM SHNIBPS_DEV01.IP_COMORBID;
+
+CREATE TABLE IP_CODE AS SELECT * FROM SHNIBPS_DEV01.IP_CODE;
+
+CREATE TABLE IP_PAT_DIET AS SELECT * FROM SHNIBPS_DEV01.IP_PAT_DIET;
+
+CREATE TABLE IP_MOBILITY AS SELECT * FROM SHNIBPS_DEV01.IP_MOBILITY;
+
+CREATE TABLE IP_ADM_REQ_CHD AS SELECT * FROM SHNIBPS_DEV01.IP_ADM_REQ_CHD;
+
+CREATE TABLE IP_ADM_REQ_MST AS SELECT * FROM SHNIBPS_DEV01.IP_ADM_REQ_MST;
+
+CREATE TABLE PAT_MEDICAL_HX AS SELECT * FROM SHNIBPS_DEV01.PAT_MEDICAL_HX;
+CREATE TABLE PAT_MEDICAL_HX_TEST AS SELECT * FROM SHNIBPS_DEV01.PAT_MEDICAL_HX_TEST;
+CREATE TABLE PAT_MEDICAL_HX_RX AS SELECT * FROM SHNIBPS_DEV01.PAT_MEDICAL_HX_RX;
+
+CREATE TABLE PAT_SURGICAL_HX AS SELECT * FROM SHNIBPS_DEV01.PAT_SURGICAL_HX;
+CREATE TABLE EH_IMMUNIZATION AS SELECT * FROM SHNIBPS_DEV01.EH_IMMUNIZATION;
+
+CREATE OR REPLACE FORCE VIEW ehv_vacntype (sn,
+                                                         vacntype_id,
+                                                         vacntype_name,
+                                                         rsta
+                                                        )
+AS
+   SELECT sn, lkp_id vacntype_id, lkp_name vacntype_name, rsta
+     FROM m00_lkp
+    WHERE grp_id = 17;
+
+CREATE TABLE EH_FAMILY_HX AS SELECT * FROM SHNIBPS_DEV01.EH_FAMILY_HX;
+CREATE TABLE EH_PAT_FAMILY_HX AS SELECT * FROM SHNIBPS_DEV01.EH_PAT_FAMILY_HX;
+
+CREATE TABLE PAT_SOCIAL_HX AS SELECT * FROM SHNIBPS_DEV01.PAT_SOCIAL_HX;
+
+
+# 19/09/2019
+
+CREATE TABLE PM_FREQUENCY AS SELECT * FROM SHNIBPS_DEV01.PM_FREQUENCY;
+
+DROP TABLE UMCH_LIVE.PM_FREQUENCYS CASCADE CONSTRAINTS;
+
+CREATE TABLE PM_FREQUENCYS
+(
+  FREQUENCY_NO       NUMBER(4),
+  FREQUENCY_ENAME    VARCHAR2(100 BYTE),
+  FREQUENCY_LNAME    VARCHAR2(100 BYTE),
+  ABBREVIATION       VARCHAR2(20 BYTE),
+  DESCRIPTION        VARCHAR2(300 BYTE),
+  REC_STATUS         NUMBER(1),
+  FREQUENCY_ID       NUMBER(14),
+  FREQUENCY_VALUE    NUMBER(3),
+  FREQUENCY_DL       VARCHAR2(1 BYTE),
+  ADM_TIME           NUMBER(6),
+  REPEAT_VALUE       NUMBER(6,2),
+  REPEAT_FLAG        NUMBER(1),
+  DOSE_DETAILS       VARCHAR2(15 BYTE),
+  UD_SLNO            NUMBER,
+  ENTERED_BY         VARCHAR2(16 BYTE),
+  ENTRY_TIMESTAMP    DATE,
+  UPDATE_BY          VARCHAR2(16 BYTE),
+  UPDATED_TIMESTAMP  DATE,
+  COMPANY_NO         VARCHAR2(10 BYTE)
+)
+TABLESPACE USER_DATA
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+LOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING;
+
+INSERT INTO PM_FREQUENCYS  SELECT * FROM SHNIBPS_DEV01.PM_FREQUENCYS;
+
+CREATE UNIQUE INDEX UMCH_LIVE.FREQUENCY_UNIQUE ON UMCH_LIVE.PM_FREQUENCYS
+(FREQUENCY_ENAME)
+LOGGING
+TABLESPACE USER_INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL;
+
+CREATE OR REPLACE TRIGGER UMCH_LIVE."TRG_FREQUENCY" before insert OR UPDATE on  PM_FREQUENCYS for each row
+begiN
+       IF INSERTING THEN
+               insert into PM_FREQUENCY(  FREQUENCY_ID,
+                                         FREQUENCY_ENAME,
+                                         ABBREVIATION,
+                                         DESCRIPTION,
+                                         ENTERED_BY,
+                                         ENTRY_TIMESTAMP,
+                                         REC_STATUS)
+                                 values(:NEW.FREQUENCY_ID,
+                                        :NEW.FREQUENCY_ENAME,
+                                        :NEW.ABBREVIATION,
+                                        :NEW.DESCRIPTION,
+                                        :NEW.ENTERED_BY,
+                                         sysdate,
+                                        :new.REC_STATUS);
+       ELSIF UPDATING THEN
+                    UPDATE PM_FREQUENCY
+                                    SET FREQUENCY_ENAME   =:NEW.FREQUENCY_ENAME,
+                                        ABBREVIATION      =:NEW.ABBREVIATION,
+                                        DESCRIPTION       =:NEW.DESCRIPTION,
+                                        update_by         =:new.update_by,
+                                        UPDATED_TIMESTAMP = sysdate,
+                                        REC_STATUS        =:new.REC_STATUS
+                                  WHERE FREQUENCY_ID      =:NEW.FREQUENCY_ID; 
+        END IF;
+       END;
+       
+ALTER TABLE UMCH_LIVE.PM_FREQUENCYS ADD (
+  CONSTRAINT FREQUENCY_UNIQUE
+ UNIQUE (FREQUENCY_ENAME)
+    USING INDEX 
+    TABLESPACE USER_INDX
+    PCTFREE    10
+    INITRANS   2
+    MAXTRANS   255
+    STORAGE    (
+                INITIAL          64K
+                NEXT             1M
+                MINEXTENTS       1
+                MAXEXTENTS       UNLIMITED
+                PCTINCREASE      0
+               ));
+               
+INSERT INTO PM_INSTRUCTIONS  SELECT * FROM SHNIBPS_DEV01.PM_INSTRUCTIONS;
+
+CREATE SEQUENCE SEQ_PRESMEDICINE
+  START WITH 1123
+  MAXVALUE 999999
+  MINVALUE 1
+  CYCLE
+  CACHE 20
+  NOORDER;
+  
+CREATE SEQUENCE SEQ_DAYDOSECHANGE
+  START WITH 1336
+  MAXVALUE 999999
+  MINVALUE 1
+  CYCLE
+  CACHE 20
+  NOORDER;

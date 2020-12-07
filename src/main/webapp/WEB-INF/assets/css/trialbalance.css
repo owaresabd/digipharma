@@ -1,0 +1,45 @@
+@charset "ISO-8859-1";
+
+.uus {
+	font-style: italic;
+   	font-weight: bold;
+   	text-decoration: underline;
+}
+
+#bl {
+	font-weight: bold;
+	font-size: x-large;
+}
+
+.uusa {
+	font-style: italic;
+   	font-weight: bold;
+   	font-size: larger;
+   	text-decoration: underline;
+}
+
+.bi {
+	font-style: italic;
+   	font-weight: bold;
+}
+
+.net {
+	font-style: italic;
+   	font-weight: bold;
+   	text-decoration: underline double;
+   	font-size: larger;
+}
+
+.bin {
+	font-style: italic;
+   	font-weight: bold;
+   	font-size: large;
+}
+
+.b {
+   	font-weight: bold;
+}
+
+table tfoot{
+	display:table-row-group;
+}
