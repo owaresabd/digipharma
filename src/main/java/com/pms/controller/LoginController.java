@@ -11,27 +11,17 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.pms.model.DashboardInfo;
+import com.pms.service.IUserService;
 import com.pms.model.RolePrivilege;
 import com.pms.model.User;
-import com.pms.service.DashboardService;
-import com.pms.service.EquipmentService;
-import com.pms.service.IUserService;
-import com.pms.service.RefStandardService;
 
 @Controller
 public class LoginController {
 
 	@Autowired
 	private IUserService userService;
-	@Autowired
-	private DashboardService dashboardService;
-	@Autowired
-	private EquipmentService equipmentService;
-	@Autowired
-	private RefStandardService refStandardService;
+	
+	
 	
 	@ResponseBody
 	@RequestMapping(value = { "/", "/login" }, method = RequestMethod.GET)
@@ -51,20 +41,17 @@ public class LoginController {
 		if (user != null) {
 			List<RolePrivilege> menuList = userService.getAllMenu(user.getTypeId());
 			
-			DashboardInfo info=dashboardService.getDashboardInfo();
-			//DashboardInfo accessInfo=dashboardService.getAccessInfo();
-			model.put("info", info);
 			model.put("user", user);
 			model.put("menuList", menuList);
 			model.put("count", menuList.size());
-			//This line for equipment maintenance page access on Dash board done by owares
-			//model.put("accessInfo", accessInfo);
-			//model.put("mainList", equipmentService.getEquipNotificationInfos());
-			//model.put("refMsgList", refStandardService.getRefNotificationInfos());
-			GsonBuilder gson = new GsonBuilder();
-			Gson g = gson.create();
-			modelAndView.addObject("chartInfo", g.toJson(dashboardService.getMonthlyTestInfos()));
-			modelAndView.addObject("pieChartInfo", g.toJson(dashboardService.getTypeWiseTestInfos()));
+			
+			/*
+			 * GsonBuilder gson = new GsonBuilder(); Gson g = gson.create();
+			 * modelAndView.addObject("chartInfo",
+			 * g.toJson(dashboardService.getMonthlyTestInfos()));
+			 * modelAndView.addObject("pieChartInfo",
+			 * g.toJson(dashboardService.getTypeWiseTestInfos()));
+			 */
 			
 			
 			modelAndView.setViewName("index");

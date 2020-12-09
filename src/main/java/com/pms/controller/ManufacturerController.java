@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.pms.model.ManufacturerInfo;
 import com.pms.service.ManufacturerService;
+import com.pms.model.ManufacturerInfo;
 
 @Controller
 @RequestMapping("/manufacture")

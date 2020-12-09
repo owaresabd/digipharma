@@ -16,13 +16,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.pms.service.CompanyPrivilegeService;
+import com.pms.service.CompanyService;
+import com.pms.service.MenuService;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.pms.model.CompanyPrivilege;
 import com.pms.model.Privilege;
-import com.pms.service.CompanyPrivilegeService;
-import com.pms.service.CompanyService;
-import com.pms.service.MenuService;
 
 @Controller
 @RequestMapping("/companyprivilege")

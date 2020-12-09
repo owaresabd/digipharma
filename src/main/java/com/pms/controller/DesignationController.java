@@ -15,40 +15,41 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.pms.configure.bean.WSResponse;
-import com.pms.service.DepartmentService;
-import com.pms.model.DepartmentInfo;
+import com.pms.model.DesignationInfo;
+import com.pms.service.DesignationService;
+
 
 @Controller
-@RequestMapping("/department")
-public class DepartmentController {
+@RequestMapping("/designation")
+public class DesignationController {
 
 	@Autowired
-	private DepartmentService departmentService;
+	private DesignationService designationService;
 
 	@RequestMapping("/maintain")
 	public ModelAndView maintain() {
 		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.addObject("deptList", departmentService.getAll(null));
-		modelAndView.setViewName("warehouse_dashboard/setup_info/dept_info");
+		modelAndView.addObject("designationList", designationService.getAll(null));
+		modelAndView.setViewName("inventory_management/setup_info/designation_info");
 		return modelAndView;
 	}
 
 	@ResponseBody
-	@RequestMapping(value = "/save-department-info", method = RequestMethod.POST)
-	public ModelAndView saveDepartmentInfo(@Valid @ModelAttribute("departmentInfo") DepartmentInfo departmentInfo) {
+	@RequestMapping(value = "/save-designation-info", method = RequestMethod.POST)
+	public ModelAndView saveDesignationInfo(@Valid @ModelAttribute("designationInfo") DesignationInfo designationInfo) {
 		ModelAndView modelAndView = new ModelAndView();
-		departmentService.saveDepartmentInfos(departmentInfo);
-		modelAndView.addObject("deptList", departmentService.getAll(null));
-		modelAndView.setViewName("warehouse_dashboard/setup_info/dept_info");
+		designationService.saveDesignationInfos(designationInfo);
+		modelAndView.addObject("designationList", designationService.getAll(null));
+		modelAndView.setViewName("inventory_management/setup_info/designation_info");
 		return modelAndView;
 	}
 
 	@ResponseBody
-	@RequestMapping(value = "/validate-deptNo/{deptNo}", method = RequestMethod.GET)
-	public WSResponse validateDeptNo(@PathVariable("deptNo") String deptNo) {
+	@RequestMapping(value = "/validate-designationNo/{designationNo}", method = RequestMethod.GET)
+	public WSResponse validateDesignationNo(@PathVariable("designationNo") String designationNo) {
 		Map<String, String[]> map = new HashMap<>();
-		map.put("deptNo", new String[] { (deptNo).toString().trim() });
-		boolean bool = departmentService.validateDeptNo(map);
+		map.put("designationNo", new String[] { (designationNo).toString().trim() });
+		boolean bool = designationService.validateDesignationNo(map);
 		if (!bool) {
 			return new WSResponse("true", null, null, null, null, null);
 		} else {

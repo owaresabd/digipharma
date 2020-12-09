@@ -10,7 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "pms_designation_infos")
+@Table(name = "dms_designation_infos")
 public class DesignationInfo {
 
 	@Id
@@ -18,6 +18,9 @@ public class DesignationInfo {
 	@org.hibernate.annotations.Type(type = "org.hibernate.type.PostgresUUIDType")
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private UUID id;
+
+	@Column(name = "designation_no")
+	private String designationNo;
 
 	@Column(name = "designation_name")
 	private String designationName;
@@ -34,6 +37,16 @@ public class DesignationInfo {
 
 	public void setId(UUID id) {
 		this.id = id;
+	}
+
+	
+
+	public String getDesignationNo() {
+		return designationNo;
+	}
+
+	public void setDesignationNo(String designationNo) {
+		this.designationNo = designationNo;
 	}
 
 	public String getDesignationName() {
@@ -59,7 +72,5 @@ public class DesignationInfo {
 	public void setStatus(String status) {
 		this.status = status;
 	}
-	
-	
 
 }

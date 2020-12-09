@@ -18,14 +18,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.pms.configure.bean.WSResponse;
-import com.pms.model.User;
-import com.pms.model.UserTypes;
 import com.pms.service.CompanyService;
 import com.pms.service.IUserService;
 import com.pms.service.RoleService;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.pms.model.User;
+import com.pms.model.UserTypes;
 
 @Controller
 @RequestMapping("/role")

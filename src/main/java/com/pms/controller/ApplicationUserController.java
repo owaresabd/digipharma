@@ -16,12 +16,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.pms.service.ApplicationUserService;
+import com.pms.service.CompanyService;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.pms.model.ApplicationUser;
 import com.pms.model.User;
-import com.pms.service.ApplicationUserService;
-import com.pms.service.CompanyService;
 
 @Controller
 @RequestMapping("/appuser")

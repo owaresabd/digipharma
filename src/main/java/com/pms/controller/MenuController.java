@@ -17,13 +17,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.pms.configure.bean.WSResponse;
+import com.pms.service.MenuService;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.pms.configure.bean.WSResponse;
 import com.pms.model.Module;
 import com.pms.model.Privilege;
 import com.pms.model.Suite;
-import com.pms.service.MenuService;
 
 @Controller
 @RequestMapping("/menu")

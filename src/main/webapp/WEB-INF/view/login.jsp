@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>PMS :: Pharmacy Management System</title>
+    <title>DMS :: Diagnostic Management System</title>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/loginForm.css" media="screen"></link>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/has-float-label.css" media="screen"></link>
     <link rel='stylesheet' type="text/css" href='${pageContext.request.contextPath}/css/bootstrap.min.css'>
@@ -152,7 +152,7 @@
 	<div class="wrapper">
 	<div class="container">
 	<%-- <div class="bg-info" align="center"><img src="${pageContext.request.contextPath}/image/header-logo.png"></div>--%>
-	<h3 class="text-center bold">Pharmacy Management System</h3> 
+	<h3 class="text-center bold">Diagnostic Management System</h3> 
 	    <form action="${pageContext.request.contextPath}/login" method="POST" class="form form-signin">
 	    	<div class="logo" align="center"><img src="${pageContext.request.contextPath}/image/user-login.png"></div>
 	        <div class="form-group">
@@ -184,7 +184,7 @@
 			
 	
 	    </form>
-	    <ul class="bg-bubbles">
+	    <!-- <ul class="bg-bubbles">
 		<li></li>
     <li></li>
 		<li></li>
@@ -196,7 +196,7 @@
 		<li></li>
 		<li></li>
 		<li></li>
-	</ul>
+	</ul> -->
 </div>
 
 	</div>

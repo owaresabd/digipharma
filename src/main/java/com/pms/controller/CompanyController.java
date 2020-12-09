@@ -17,8 +17,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.pms.model.Company;
 import com.pms.service.CompanyService;
+import com.pms.model.Company;
 
 @Controller
 @RequestMapping("/company")

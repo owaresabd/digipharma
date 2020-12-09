@@ -95,11 +95,11 @@
 
     <!-- Morris Plugin Js -->
     <script src="${pageContext.request.contextPath}/vendor/raphael/raphael.min.js"></script>
-    <script src="${pageContext.request.contextPath}/vendor/morrisjs/morris.js"></script>
+   <script src="${pageContext.request.contextPath}/vendor/morrisjs/morris.js"></script>
 
     <!-- ChartJs -->
     <script src="${pageContext.request.contextPath}/vendor/chartjs/Chart.bundle.js"></script>
-   <script src="${pageContext.request.contextPath}/js/chartjs.js"></script>
+  <!--  <script src="${pageContext.request.contextPath}/js/chartjs.js"></script> -->
 
     <!-- Flot Charts Plugin Js -->
     <script src="${pageContext.request.contextPath}/vendor/flot-charts/jquery.flot.js"></script>
@@ -287,7 +287,7 @@
                 <a href="javascript:void(0);" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false"></a>
                 <a href="javascript:void(0);" class="bars"></a>
                 <a class="navbar-brand" style="font-size: 20px;" href="${pageContext.request.contextPath}/index">
-                	<span style="text-shadow: 2px 2px 2px #aaa;"><i><b>&nbsp;&nbsp;&nbsp;&nbsp;</b><b><%-- ${user.companyName} --%>Pharmacy Management System</b></i></span>
+                	<span style="text-shadow: 2px 2px 2px #aaa;"><i><b>&nbsp;&nbsp;&nbsp;&nbsp;</b><b><%-- ${user.companyName} --%>Diagnostic Management System</b></i></span>
                 </a>
             </div>
             <div class="collapse navbar-collapse m-t-10" id="navbar-collapse">
@@ -442,36 +442,7 @@
 				<div class="block-header">
 					<h2 style="text-shadow: 2px 2px 2px #aaa;">DASHBOARD</h2>
 				</div>
-				<%-- <c:if test="${accessInfo.isEquipment eq 1}">
-				<div class="row">
-                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                    <div class="info-box bg-pink hover-zoom-effect">
-                        <div class="icon">
-                            <i class="material-icons">email</i>
-                        </div>
-                        <div class="content go_maintain" >
-                            <div class="text">MESSAGES</div>
-                            <div class="number">${accessInfo.totalNotification }</div>
-                        </div>
-                    </div>
-
-                </div>
-                <div class="col-lg-9 go_maintain">
-                    <div class="info-box bg-pink hover-zoom-effect">
-                    
-                        <marquee behavior="alternate">
-                        <div class="content">
-                            <div class="number">You have ${accessInfo.totalNotification } Equipment Maintenance Notification.</div>
-                        </div>
-                         </marquee>
-                        
-                    </div>
-
-                </div>
-                
- 		</div>
- 		
- 		 </c:if> --%>
+				
 				<!-- Widgets -->
 				 <div class="row clearfix">
 					<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
@@ -481,7 +452,7 @@
 							</div>
 							<div class="content">
 								<div class="text">PENDING CSS REQUEST</div>
-								<div class="number count-to"  data-to="${info.totalPendingCss }" data-speed="1000" data-fresh-interval="20"></div>
+								<div class="number count-to"  data-to="0" data-speed="1000" data-fresh-interval="20"></div>
 							</div>
 						</div>
 					</div>
@@ -492,7 +463,7 @@
 							</div>
 							<div class="content">
 								<div class="text">PENDING SAMPLE</div>
-								<div class="number count-to"  data-to="${info.totalPendingSampling }" data-speed="1000" data-fresh-interval="20"></div>
+								<div class="number count-to"  data-to="0" data-speed="1000" data-fresh-interval="20"></div>
 							</div>
 						</div>
 					</div>
@@ -503,7 +474,7 @@
 							</div>
 							<div class="content">
 								<div class="text"> PENDING RECEIVE </div>
-								<div class="number count-to"  data-to="${info.totalPendingRcv }" data-speed="1000" data-fresh-interval="20"></div>
+								<div class="number count-to"  data-to="0" data-speed="1000" data-fresh-interval="20"></div>
 							</div>
 						</div>
 					</div>
@@ -514,7 +485,7 @@
 							</div>
 							<div class="content">
 								<div class="text">PENDING DISTRIBUTION</div>
-								<div class="number count-to" id="serPenSize" data-to="${info.totalPendingDist }" data-speed="1000" data-fresh-interval="20"></div>
+								<div class="number count-to" id="serPenSize" data-to="0" data-speed="1000" data-fresh-interval="20"></div>
 							</div>
 						</div>
 					</div>
@@ -525,7 +496,7 @@
 							</div>
 							<div class="content">
 								<div class="text">PENDING RESULT</div>
-								<div class="number count-to"  id="rpExpSize" data-to="${info.totalPendingResult}" data-speed="1000" data-fresh-interval="20"></div>
+								<div class="number count-to"  id="rpExpSize" data-to="0" data-speed="1000" data-fresh-interval="20"></div>
 							</div>
 						</div>
 					</div>
@@ -536,7 +507,7 @@
 							</div>
 							<div class="content">
 								<div class="text">PENDING VERIFIED</div>
-								<div class="number count-to"  id="insExpSize" data-to="${info.totalPendingAcceptance}" data-speed="1000" data-fresh-interval="20"></div>
+								<div class="number count-to"  id="insExpSize" data-to="0" data-speed="1000" data-fresh-interval="20"></div>
 							</div>
 						</div>
 					</div>
@@ -547,7 +518,7 @@
 							</div>
 							<div class="content">
 								<div class="text">TM PENDING</div>
-								<div class="number count-to"  id="licExpSize" data-to="${info.totalPendingTm}" data-speed="1000" data-fresh-interval="20"></div>
+								<div class="number count-to"  id="licExpSize" data-to="0" data-speed="1000" data-fresh-interval="20"></div>
 							</div>
 						</div>
 					</div>
@@ -558,7 +529,7 @@
 							</div>
 							<div class="content">
 								<div class="text">LM PENDING</div>
-								<div class="number count-to"  id="fitExpSize" data-to="${info.totalPendingLm}" data-speed="1000" data-fresh-interval="20"></div>
+								<div class="number count-to"  id="fitExpSize" data-to="0" data-speed="1000" data-fresh-interval="20"></div>
 							</div>
 						</div>
 					</div>
@@ -566,7 +537,7 @@
 					
 					
 				</div>
-				<div class="row clearfix">
+				<%-- <div class="row clearfix">
                 <!-- Line Chart -->
                 
                 <!-- #END# Line Chart -->
@@ -594,7 +565,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --%>
  		
  		
     	</div>
@@ -604,32 +575,7 @@
 
 	<script>
 	
-	$(".go_maintain").on('click', function(e){
-		var link =  "${pageContext.request.contextPath}/equipment/maintenance";
-		$.ajax({
-			async : false,
-			url : link ,
-			success : function(result) {
-				$("#view_page").html(result);
-			},
-			error: function(){
-				console.log("this employee has no user id.");
-		  	}
-		});
-	});
-	$(".go_standard").on('click', function(e){
-		var link =  "${pageContext.request.contextPath}/ref_standard/referenceStandard";
-		$.ajax({
-			async : false,
-			url : link ,
-			success : function(result) {
-				$("#view_page").html(result);
-			},
-			error: function(){
-				console.log("this employee has no user id.");
-		  	}
-		});
-	});
+	
 	function getRandomRgb() {
 		  var num = Math.round(0xffffff * Math.random());
 		  var r = num >> 16;
@@ -672,16 +618,16 @@
 		}
 		
 		
-		var chartData = ${chartInfo};
+		 /*var chartData = ${chartInfo};
 		var monthName = [];
 		var totalTest = [];
 		
 		var typeChartData = ${pieChartInfo};
 		var typeName = [];
 		var totalTypeTest = [];
-		var pieChartColor = [];
+		var pieChartColor = [];*/
 		$(function () {
-		    for(var i=0; i<chartData.length; i++){
+		   /* for(var i=0; i<chartData.length; i++){
 		    	monthName.push(chartData[i].monthName);
 		    	totalTest.push(chartData[i].noOfTest);
 		    	
@@ -693,7 +639,7 @@
 		    	 pieChartColor.push(getRandomRgb());
 		    	
 		    }
-		     /*
+		     
 		    for(var i=0; i<recData.length; i++){
 		    	receiveGroup.push(recData[i].accountParentName);
 		    	receiveTotal.push(recData[i].drAmount);
@@ -701,7 +647,7 @@
 		    }
 		     */
 		    clockJs();
-		    chartStart();
+		    //chartStart();
 		});
 		
 		function chartStart(){
@@ -750,7 +696,7 @@
 		    } 
 		    
 		    return config;
-		}
+		} 
 		function clockJs(){
 			var $dOut = $('#date'),
 			    $hOut = $('#hours'),

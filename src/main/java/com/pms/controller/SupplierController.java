@@ -9,18 +9,20 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.pms.configure.bean.WSResponse;
+import com.pms.service.SupplierService;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.pms.configure.bean.WSResponse;
 import com.pms.model.SupplierInfo;
-import com.pms.service.SupplierService;
 
 
 
@@ -31,7 +33,7 @@ public class SupplierController {
 	@Autowired
 	private SupplierService supplierService;
 
-	@RequestMapping("/maintain")
+	@GetMapping("/maintain")
 	public ModelAndView maintain() {
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.addObject("infos", supplierService.getAll(null));
@@ -39,8 +41,7 @@ public class SupplierController {
 		return modelAndView;
 	}
 
-	@ResponseBody
-	@RequestMapping(value = "/supplierDetails/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(value = "/supplierDetails/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public String getSupplierDetails(@PathVariable("id") String id) {
 		Map<String, String[]> map = new HashMap<>();
 		map.put("id", new String[] { (id).toString().trim() });
@@ -50,8 +51,7 @@ public class SupplierController {
 		return g.toJson(jsonList);
 	}
 
-	@ResponseBody
-	@RequestMapping(value = "/save-suppliers", method = RequestMethod.POST)
+	@PostMapping(value = "/save-suppliers")
 	public ModelAndView saveSuppliers(@Valid @ModelAttribute("supplierInfo") SupplierInfo supplierInfo) {
 		ModelAndView modelAndView = new ModelAndView();
 		supplierService.saveSupplierInfos(supplierInfo);

@@ -16,11 +16,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.pms.configure.bean.WSResponse;
+import com.pms.service.ItemTypeService;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.pms.configure.bean.WSResponse;
 import com.pms.model.ItemTypeInfo;
-import com.pms.service.ItemTypeService;
 
 @Controller
 @RequestMapping("/itemType")
