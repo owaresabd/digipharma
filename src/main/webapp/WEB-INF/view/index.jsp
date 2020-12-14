@@ -287,7 +287,7 @@
                 <a href="javascript:void(0);" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false"></a>
                 <a href="javascript:void(0);" class="bars"></a>
                 <a class="navbar-brand" style="font-size: 20px;" href="${pageContext.request.contextPath}/index">
-                	<span style="text-shadow: 2px 2px 2px #aaa;"><i><b>&nbsp;&nbsp;&nbsp;&nbsp;</b><b><%-- ${user.companyName} --%>Diagnostic Management System</b></i></span>
+                	<span style="text-shadow: 2px 2px 2px #aaa;"><i><b>&nbsp;&nbsp;&nbsp;&nbsp;</b><b><%-- ${user.companyName} --%>Pharmacy Management System</b></i></span>
                 </a>
             </div>
             <div class="collapse navbar-collapse m-t-10" id="navbar-collapse">

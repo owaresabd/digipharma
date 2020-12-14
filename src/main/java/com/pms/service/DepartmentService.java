@@ -1,39 +1,65 @@
 package com.pms.service;
 
+import java.util.Comparator;
 import java.util.List;
-import java.util.Map;
+import java.util.stream.Collectors;
+
+import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.pms.model.DepartmentInfo;
+import com.pms.model.User;
 import com.pms.repository.DepartmentRepository;
 
 @Service
+@Transactional
 public class DepartmentService {
-
+	@Autowired
+	private IUserService userService;
 	@Autowired
 	private DepartmentRepository departmentRepository;
-
+  
 	public List<DepartmentInfo> getAll(String status) {
-		return departmentRepository.findAll(status);
-	}
+		User user = userService.getCurrentUser();
+		if (status != null) {
+			return departmentRepository.findAll().stream()
+					.filter(info -> info.getStatus().equals(status) && info.getCompanyId().equals(user.getCompanyId()))
+					.sorted(Comparator.comparing(c -> c.getDepartmentName(), String.CASE_INSENSITIVE_ORDER))
+					.collect(Collectors.toList());
 
-	public List<DepartmentInfo> getAllItemsDeprtment() {
-		return departmentRepository.findAllItemsDeprtment();
-	}
+		} else {
+			return departmentRepository.findAll().stream()
+					.filter(info ->info.getCompanyId().equals(user.getCompanyId()))
+					.sorted(Comparator.comparing(c -> c.getDepartmentName(), String.CASE_INSENSITIVE_ORDER))
+					.collect(Collectors.toList());
 
-	public void saveDepartmentInfos(DepartmentInfo departmentInfo) {
-		departmentRepository.saveDepartmentInfos(departmentInfo);
-	}
-
-	public boolean validateDeptNo(Map<String, String[]> requestMap) {
-		String deptNo = requestMap.get("deptNo")[0];
-		List<DepartmentInfo> entityTransDtlsList = departmentRepository.validateDeptNo(deptNo);
-		if (entityTransDtlsList.size() == 0) {
-			return true;
 		}
-
-		return false;
 	}
+
+	
+
+	public void saveOrUpdate(DepartmentInfo info) {
+		User user = userService.getCurrentUser();
+		if (info.getId() == null ) {
+			info.setCompanyId(user.getCompanyId());
+			info.setCreatedBy(user.getId());
+
+		} else {
+			info.setUpdatedBy(user.getId());
+		}
+		departmentRepository.save(info);
+		
+	}
+	
+
+	/*
+	 * public boolean validateDeptNo(Map<String, String[]> requestMap) { String
+	 * deptNo = requestMap.get("deptNo")[0]; List<DepartmentInfo>
+	 * entityTransDtlsList = departmentRepository.validateDeptNo(deptNo); if
+	 * (entityTransDtlsList.size() == 0) { return true; }
+	 * 
+	 * return false; }
+	 */
 }

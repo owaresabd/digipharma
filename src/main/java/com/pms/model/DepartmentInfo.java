@@ -1,5 +1,6 @@
 package com.pms.model;
 
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 import javax.persistence.Column;
@@ -9,8 +10,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.data.annotation.CreatedBy;
+
 @Entity
-@Table(name = "lims_department_infos")
+@Table(name = "pms_department_infos")
 public class DepartmentInfo {
 
 	@Id
@@ -19,17 +24,33 @@ public class DepartmentInfo {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private UUID id;
 
-	@Column(name = "dept_no")
-	private String deptNo;
-
-	@Column(name = "dept_name")
-	private String deptName;
+	@Column(name = "department_name")
+	private String departmentName;
 
 	@Column(name = "remarks")
 	private String remarks;
 
 	@Column(name = "status")
 	private String status;
+	
+	@Column(name = "company_id",updatable=false)
+	private UUID companyId;
+	
+	@Column(name = "created_by",updatable=false)
+	@CreatedBy
+	private UUID createdBy;
+	
+	@Column(name = "created_at", updatable=false)
+	@CreationTimestamp
+	private LocalDateTime createDateTime;
+	
+	@Column(name = "updated_by",insertable=false)
+	@CreatedBy
+	private UUID updatedBy;
+	
+	@Column(name = "updated_at",insertable=false)
+	@UpdateTimestamp
+	private LocalDateTime updateDateTime;
 
 	public UUID getId() {
 		return id;
@@ -39,20 +60,14 @@ public class DepartmentInfo {
 		this.id = id;
 	}
 
-	public String getDeptNo() {
-		return deptNo;
+	
+
+	public String getDepartmentName() {
+		return departmentName;
 	}
 
-	public void setDeptNo(String deptNo) {
-		this.deptNo = deptNo;
-	}
-
-	public String getDeptName() {
-		return deptName;
-	}
-
-	public void setDeptName(String deptName) {
-		this.deptName = deptName;
+	public void setDepartmentName(String departmentName) {
+		this.departmentName = departmentName;
 	}
 
 	public String getRemarks() {
@@ -69,6 +84,46 @@ public class DepartmentInfo {
 
 	public void setStatus(String status) {
 		this.status = status;
+	}
+
+	public UUID getCompanyId() {
+		return companyId;
+	}
+
+	public void setCompanyId(UUID companyId) {
+		this.companyId = companyId;
+	}
+
+	public UUID getCreatedBy() {
+		return createdBy;
+	}
+
+	public void setCreatedBy(UUID createdBy) {
+		this.createdBy = createdBy;
+	}
+
+	public LocalDateTime getCreateDateTime() {
+		return createDateTime;
+	}
+
+	public void setCreateDateTime(LocalDateTime createDateTime) {
+		this.createDateTime = createDateTime;
+	}
+
+	public UUID getUpdatedBy() {
+		return updatedBy;
+	}
+
+	public void setUpdatedBy(UUID updatedBy) {
+		this.updatedBy = updatedBy;
+	}
+
+	public LocalDateTime getUpdateDateTime() {
+		return updateDateTime;
+	}
+
+	public void setUpdateDateTime(LocalDateTime updateDateTime) {
+		this.updateDateTime = updateDateTime;
 	}
 
 }

@@ -32,7 +32,7 @@ public class EmployeeController {
 		
 		modelAndView.addObject("employeeInfos", employeeService.getAll(null));
 		modelAndView.addObject("desigInfos", designationService.getAll("Y"));
-		modelAndView.setViewName("inventory_management/setup_info/employee_info");
+		modelAndView.setViewName("setup/employee_info");
 		return modelAndView;
 	}
 	
@@ -45,7 +45,7 @@ public class EmployeeController {
 		employeeService.saveEmployeeInfos(requestMap);
 		modelAndView.addObject("employeeInfos", employeeService.getAll(null));
 		modelAndView.addObject("desigInfos", designationService.getAll("Y"));
-		modelAndView.setViewName("inventory_management/setup_info/employee_info");
+		modelAndView.setViewName("setup/employee_info");
 		return modelAndView;
 	}
 	

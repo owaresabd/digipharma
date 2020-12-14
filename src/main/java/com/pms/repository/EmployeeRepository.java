@@ -37,7 +37,7 @@ public class EmployeeRepository {
 		User user = userService.getCurrentUser();
 		return jdbcTemplate.query(
 				"select id, ud_emp_no, emp_name, desig_id,fnc_desig_nm(desig_id) desig_nm, father_name, mother_name, dob, gender_id, blood_group, marital_status, address, nid, mobile_no, email, qualification, join_date, status "
-				+ " from vms_employee_infos where company_id = ? "
+				+ " from pms_employee_infos where company_id = ? "
 				+ " and status=" + (status != null ? "'" + status + "'" : "status") + " order by ud_emp_no ",
 				new Object[] { user.getCompanyId() }, new EmployeeInfoRowMapper());
 	}
@@ -55,7 +55,7 @@ public class EmployeeRepository {
 
 		if (employeeInfo.getId() == null) {
 			jdbcTemplate.update(
-					"INSERT INTO vms_employee_infos(ud_emp_no, emp_name, desig_id, father_name, mother_name, dob, gender_id,"
+					"insert into pms_employee_infos(ud_emp_no, emp_name, desig_id, father_name, mother_name, dob, gender_id,"
 					+ " blood_group, marital_status, address, nid, mobile_no, email, qualification, join_date, status,"
 					+ "  company_id, created_by, created_at) "
 					+ "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
@@ -64,7 +64,7 @@ public class EmployeeRepository {
 					employeeInfo.getMobileNo(),employeeInfo.getEmail(),employeeInfo.getQualification(),employeeInfo.getJoiningDate(), employeeInfo.getStatus(), user.getCompanyId(), user.getId(),  time);
 		} else {
 			jdbcTemplate.update(
-					"UPDATE vms_employee_infos SET ud_emp_no=?, emp_name=?, desig_id=?, father_name=?, mother_name=?, "
+					"update pms_employee_infos SET ud_emp_no=?, emp_name=?, desig_id=?, father_name=?, mother_name=?, "
 					+ " dob=?, gender_id=?, blood_group=?, marital_status=?, address=?, nid=?, mobile_no=?, email=?, qualification=?, join_date=?, status=?, "
 					+ " updated_by=?, updated_at=? where id = ?",
 					employeeInfo.getUdEmpNo().toUpperCase(), employeeInfo.getEmpName().toUpperCase(), employeeInfo.getDesigId(),employeeInfo.getFatherName(),employeeInfo.getMotherName(),
@@ -79,7 +79,7 @@ public class EmployeeRepository {
 	public List<EmployeeInfo> validateUdEmpNo (String udEmpNo) {
 		List<EmployeeInfo> entityList = jdbcTemplate.query("select id, ud_emp_no, emp_name, desig_id,fnc_desig_nm(desig_id) desig_nm, father_name, mother_name, dob, gender_id,"
 										+ "  blood_group, marital_status, address, nid, mobile_no, email, qualification, join_date, status  "
-										+ " from vms_employee_infos where ud_emp_no = ?",
+										+ " from pms_employee_infos where ud_emp_no = ?",
 				new Object[] { udEmpNo }, new EmployeeInfoRowMapper());
 		if (entityList == null) {
 			throw new UsernameNotFoundException("does not exist.");
