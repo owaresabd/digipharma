@@ -14,16 +14,7 @@ textarea {
 <div class="container-fluid">
 	<div class="block-header">
 	    <span style="text-shadow: 2px 2px 2px #aaa;">EMPLOYEE INFORMATION</span>
-    	<%-- <div class="btn-group language pull-right">
-            <button type="button" class="btn btn-success btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <i class="material-icons">g_translate</i>
-                <span><spring:message code="btn.lang.title"/></span><span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu">
-            	<li><a class="dropdown-item" id="${pageContext.request.contextPath}/employee/maintain?lang=en" onclick="chngLang(this)"><spring:message code="app.lang.english"/></a></li>
-                <li><a class="dropdown-item" id="${pageContext.request.contextPath}/employee/maintain?lang=bn" onclick="chngLang(this)"><spring:message code="app.lang.bangla"/></a></li>
-            </ul>
-        </div> --%>
+    	
 	</div>
 	<div class="row clearfix">
 		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">

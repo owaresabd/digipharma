@@ -152,7 +152,7 @@
 	<div class="wrapper">
 	<div class="container">
 	<%-- <div class="bg-info" align="center"><img src="${pageContext.request.contextPath}/image/header-logo.png"></div>--%>
-	<h3 class="text-center bold">Pharmacy Management System</h3> 
+	<h3 class="text-center bold">PMS</h3> 
 	    <form action="${pageContext.request.contextPath}/login" method="POST" class="form form-signin">
 	    	<div class="logo" align="center"><img src="${pageContext.request.contextPath}/image/user-login.png"></div>
 	        <div class="form-group">

@@ -12,13 +12,16 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.pms.model.SupplierInfo;
 import com.pms.service.SupplierService;
+import com.pms.service.SupplierTypeService;
 
 
 
 @Controller
 @RequestMapping("/supplier")
 public class SupplierController {
-
+	
+	@Autowired
+	private SupplierTypeService supplierTypeService;
 	@Autowired
 	private SupplierService supplierService;
 
@@ -26,6 +29,7 @@ public class SupplierController {
 	public ModelAndView maintain() {
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.addObject("infos", supplierService.getAll(null));
+		modelAndView.addObject("typeInfos", supplierTypeService.getAll("Y"));
 		modelAndView.setViewName("setup/supplierInfo");
 		return modelAndView;
 	}
@@ -33,12 +37,9 @@ public class SupplierController {
 	
 
 	@PostMapping(value = "/save-suppliers")
-	public ModelAndView saveSuppliers(@Valid @ModelAttribute("supplierInfo") SupplierInfo supplierInfo) {
-		ModelAndView modelAndView = new ModelAndView();
-		supplierService.saveSupplierInfos(supplierInfo);
-		modelAndView.addObject("infos", supplierService.getAll(null));
-		modelAndView.setViewName("inventory_management/setup_info/supplierInfo");
-		return modelAndView;
+	public String saveSuppliers(@Valid @ModelAttribute("supplierInfo") SupplierInfo supplierInfo) {
+		supplierService.saveOrUpdate(supplierInfo);
+		return "redirect:/supplier/maintain";
 	}
 
 	

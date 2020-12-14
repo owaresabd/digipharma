@@ -1,47 +1,55 @@
 package com.pms.service;
 
+import java.util.Comparator;
 import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.stream.Collectors;
+
+import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.pms.model.SupplierInfo;
+import com.pms.model.User;
 import com.pms.repository.SupplierRepository;
 
-
 @Service
+@Transactional
 public class SupplierService {
-
+	@Autowired
+	private IUserService userService;
 	@Autowired
 	private SupplierRepository supplierRepository;
 
 	public List<SupplierInfo> getAll(String status) {
-		return supplierRepository.findAll(status);
-	}
+		User user = userService.getCurrentUser();
+		if (status != null) {
+			return supplierRepository.findAll().stream()
+					.filter(info -> info.getStatus().equals(status) && info.getCompanyId().equals(user.getCompanyId()))
+					.sorted(Comparator.comparing(c -> c.getSupplierName(), String.CASE_INSENSITIVE_ORDER))
+					.collect(Collectors.toList());
 
-	public SupplierInfo getById(Map<String, String[]> requestMap) {
-		UUID id = UUID.fromString(requestMap.get("id")[0]);
-		return supplierRepository.findById(id);
-	}
+		} else {
+			return supplierRepository.findAll().stream()
+					.filter(info -> info.getCompanyId().equals(user.getCompanyId()))
+					.sorted(Comparator.comparing(c -> c.getSupplierName(), String.CASE_INSENSITIVE_ORDER))
+					.collect(Collectors.toList());
 
-	public void saveSupplierInfos(SupplierInfo supplierInfo) {
-		supplierRepository.saveSupplierInfos(supplierInfo);
-	}
-
-	public UUID delete(Map<String, String[]> requestMap) {
-		UUID id = UUID.fromString(requestMap.get("id")[0]);
-		return supplierRepository.delete(id);
-	}
-
-	public boolean hasSupplierCode(Map<String, String[]> requestMap) {
-		String supplierCode = requestMap.get("supplierCode")[0];
-		List<SupplierInfo> entityTransDtlsList = supplierRepository.validateSupplierCode(supplierCode);
-		if (entityTransDtlsList.size() == 0) {
-			return true;
 		}
-
-		return false;
 	}
+
+	public void saveOrUpdate(SupplierInfo info) {
+		User user = userService.getCurrentUser();
+		if (info.getId() == null) {
+			info.setCompanyId(user.getCompanyId());
+			info.setCreatedBy(user.getId());
+
+		} else {
+			info.setUpdatedBy(user.getId());
+		}
+		supplierRepository.save(info);
+
+	}
+
+	
 }

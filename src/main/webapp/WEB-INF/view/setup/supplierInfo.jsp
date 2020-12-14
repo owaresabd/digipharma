@@ -2,21 +2,11 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <spring:message code=""/>
-<link href="${pageContext.request.contextPath}/css/bootstrap-datepicker.standalone.min.css" rel="stylesheet">
 <link href="${pageContext.request.contextPath}/css/select2.min.css" rel="stylesheet" media="screen">
 <div class="container-fluid">
 	<div class="block-header">
-	    <span style="text-shadow: 2px 2px 2px #aaa;">SUPPLIER ENTRY</span>
-    	<%-- <div class="btn-group language pull-right">
-            <button type="button" class="btn btn-success btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <i class="material-icons">g_translate</i>
-                <span><spring:message code="btn.lang.title"/></span><span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu">
-            	<li><a class="dropdown-item" id="${pageContext.request.contextPath}/service/fuelmaintain?lang=en" onclick="chngLang(this)"><spring:message code="app.lang.english"/></a></li>
-                <li><a class="dropdown-item" id="${pageContext.request.contextPath}/service/fuelmaintain?lang=bn" onclick="chngLang(this)"><spring:message code="app.lang.bangla"/></a></li>
-            </ul>
-        </div> --%>
+	    <span style="text-shadow: 2px 2px 2px #aaa;">SUPPLIER LIST</span>
+    	
 	</div>
 	<div class="row clearfix">
 		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -84,11 +74,11 @@
 	</div>
 	
 	<div class="modal fade" id="supplierInfoModal" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
-         <div class="modal-dialog" role="document">
+         <div class="modal-dialog modal-lg" role="document">
              <div class="modal-content">
                  <div class="modal-header bg-blue-grey">
                  	<button type="button" class="mod-cl close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title align-center" id="defaultModalLabel">SUPPLIER INFO</h4>
+                    <h4 class="modal-title align-center" id="defaultModalLabel">SUPPLIER INFORMATION</h4>
                  </div>
                  <form method="post" id="supplierInfoForm" modelAttribute="supplierInfo">
                  	<div class="modal-body">
@@ -96,34 +86,51 @@
                  		<input type="hidden" id="id" name="id" value=""/>
                  		<div class="row">
 	                 		<div class="col-md-6">
-                            	<span><b>SUPPLIER CODE :</b></span>
-                            	<div class="form-group">
-	                                <input type="text" id="supplierCode" maxlength="10" name="supplierCode" value="" class="form-control" placeholder="Supplier Code"  autocomplete="off" required>
-                            	</div>
-                            </div>
-                            <div class="col-md-6">
                             	<span><b>SUPPLIER NAME :</b></span>
                             	<div class="form-group">
 	                                <input type="text" id="supplierName" name="supplierName" value="" class="form-control" placeholder="Supplier name"  autocomplete="off" required>
                             	</div>
                             </div>
-                 		</div>
-                 		<div class="row">
-                            <div class="col-md-12 m-t--10">
-                            	<span><b>ADDRESS :</b></span>
+	                 		<div class="col-md-6">
+                            	<span><b>SUPPLIER CODE :</b></span>
                             	<div class="form-group">
-                                	<textarea rows="2" id="address_detail" class="form-control" placeholder="Address here......." required></textarea>
-                                	<input type="hidden" id="address" name="address" value="">
-	                            </div>
+	                                <input type="text" id="supplierCode" maxlength="10" name="supplierCode" value="" class="form-control" placeholder="Supplier Code"  autocomplete="off" required>
+                            	</div>
                             </div>
+                            
                  		</div>
                  		<div class="row">
 	                 		<div class="col-md-6">
+                            	<span><b>SUPPLIER TYPE :</b></span>
+                            	<div class="form-group">
+	                                <select  id=desigId name="desigId" class="js-example-theme-single form-control" style="width: 100%;" required="required" >
+			                        	<option></option>
+			                        <c:forEach var="info" items="${typeInfos}">
+			                           	<option value="${info.id }">${info.typeName}</option>
+			                        </c:forEach>
+			                        </select>
+                            	</div>
+                            </div>
+                            <div class="col-md-6">
                             	<span><b>CONTACT PERSON :</b></span>
                             	<div class="form-group">
 	                                <input type="text" id="contactPerson" name="contactPerson" value="" class="form-control" placeholder="Contact Person"  autocomplete="off">
                             	</div>
                             </div>
+	                 		
+                            
+                 		</div>
+                 		<div class="row">
+                            <div class="col-md-12 m-t--10">
+                            	<span><b>ADDRESS :</b></span>
+                            	<div class="form-group">
+                                	<textarea rows="4" id="address_detail" class="form-control"  required="required"></textarea>
+                                	
+	                            </div>
+                            </div>
+                 		</div>
+                 		<div class="row">
+	                 		
                             <div class="col-md-6">
                             	<span><b>DESIGNATION :</b></span>
                             	<div class="form-group">
@@ -231,7 +238,7 @@ input {
 }
 
 </style>
-		
+<script src="${pageContext.request.contextPath}/js/select2.min.js"></script> 		
 <script src="${pageContext.request.contextPath}/js/pages/tables/jquery-datatable.js"></script>
 <script>
 function chngLang(el){
@@ -247,7 +254,12 @@ function chngLang(el){
 	  	}
 	});
 }
-
+$(".js-example-theme-single").select2({
+	 
+    theme: "classic",
+	placeholder: "Select Supplier Type from list.."
+});
+ 
 $(".modal-header").on("mousedown", function(mousedownEvt) {
     var $draggable = $(this);
     var x = mousedownEvt.pageX - $draggable.offset().left,
@@ -271,9 +283,7 @@ $(function() {
         this.value = this.value.toUpperCase();
     });
 });
-$('#address_detail').keyup(function() {
-	$("#address").val(this.value);
-});
+
 $('#activity_status').change(function() {
 	if (this.checked) {
 		$('#status').val('Y');
@@ -284,19 +294,7 @@ $('#activity_status').change(function() {
 	}
 });
 
-$('#supplierCode').keyup(function() {
-	var supplierCode = $("#supplierCode").val();
-	$.get( "${pageContext.request.contextPath}/supplier/validate-supplierCode/" + supplierCode, 
-	function( data ) {
-		if (data.outcome === 'true') {
-			$(".alert-code").empty().removeClass("hidden");
-	    	$(".alert-code").html("Duplicate brake type code available!");
-		} else {
-			$(".alert-code").empty().addClass("hidden");
-			console.log("no duplicate code");
-		}
-	});
-});
+
 
 function add(el) {
 	
@@ -304,7 +302,6 @@ function add(el) {
 	$("#id").val("");
 	$("#supplierCode").val("");
 	$("#supplierName").val("");
-	$("#address_detail").val("");
 	$("#address").val("");
 	$("#contactPerson").val("");
 	$("#designation").val("");
@@ -336,7 +333,6 @@ function edit(el) {
 	$("#id").val(Id);
 	$("#supplierCode").val(supplierCode);
 	$("#supplierName").val(supplierName);
-	$("#address_detail").val(address);
 	$("#address").val(address);
 	$("#contactPerson").val(contactPerson);
 	$("#designation").val(designation);
@@ -386,35 +382,6 @@ $("#supplierInfoForm").submit(function(event){
     }
 });
 
-function del(el) {
-	var id = $(el).closest('tr').find("#row_id").val();
-	swal({
-        title: "Are you sure?",
-        text: "You will not be able to recover this data!",
-        type: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#DD6B55",
-        confirmButtonText: "Yes, delete it!",
-        cancelButtonText: "No, cancel please!",
-        closeOnConfirm: false,
-        closeOnCancel: false
-    }, function (isConfirm) {
-        if (isConfirm) {
-			$.ajax({
-				type : "GET",
-				url : "${pageContext.request.contextPath}/supplier/delete-suppliers/" + id ,
-				success : function(data) {
-					$("#view_page").html(data);
-					sweetAlert("Deleted!", "Deleted Successfully", "success", 1000, false);
-				},
-				error: function(){
-					sweetAlert("Failed!", "Something going wrong.", "fail", 1000, false);
-			  	}
-			});
-        } else {
-        	sweetAlert("Cancelled", "Your data is safe :)", "error", 1000, false);
-        }
-    });
-}
+
 	
 </script>
