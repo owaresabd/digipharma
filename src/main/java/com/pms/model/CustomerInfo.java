@@ -18,8 +18,8 @@ import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.data.annotation.CreatedBy;
 
 @Entity
-@Table(name = "pms_supplier_infos")
-public class SupplierInfo {
+@Table(name = "pms_customer_infos")
+public class CustomerInfo {
 
 	@Id
 	@Column(name = "id")
@@ -27,24 +27,19 @@ public class SupplierInfo {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private UUID id;
 
-	@Column(name = "supplier_code")
-	private String supplierCode;
+	@Column(name = "customer_code")
+	private String customerCode;
 
-	@Column(name = "supplier_name")
-	private String supplierName;
+	@Column(name = "customer_name")
+	private String customerName;
 	
-	@Column(name = "supplier_type_id",nullable = true)
-	private UUID supplierTypeId;
+	@Column(name = "customer_type_id",nullable = true)
+	private UUID customerTypeId;
 
 	@Column(name = "address")
 	private String address;
 
-	@Column(name = "contact_person")
-	private String contactPerson;
-
-	@Column(name = "designation")
-	private String designation;
-
+	
 	@Column(name = "phone_number")
 	private String phoneNumber;
 
@@ -80,10 +75,8 @@ public class SupplierInfo {
 	private LocalDateTime updateDateTime;
 	
 	@ManyToOne(fetch = FetchType.LAZY) 
-    @JoinColumn(name = "supplier_type_id", referencedColumnName = "id", insertable = false, updatable = false)
-    private SupplierTypeInfo supplierTypeInfo;
-	
-	
+    @JoinColumn(name = "customer_type_id", referencedColumnName = "id", insertable = false, updatable = false)
+    private CustomerTypeInfo customerTypeInfo;
 
 	public UUID getId() {
 		return id;
@@ -93,28 +86,28 @@ public class SupplierInfo {
 		this.id = id;
 	}
 
-	public String getSupplierCode() {
-		return supplierCode;
+	public String getCustomerCode() {
+		return customerCode;
 	}
 
-	public void setSupplierCode(String supplierCode) {
-		this.supplierCode = supplierCode;
+	public void setCustomerCode(String customerCode) {
+		this.customerCode = customerCode;
 	}
 
-	public String getSupplierName() {
-		return supplierName;
+	public String getCustomerName() {
+		return customerName;
 	}
 
-	public void setSupplierName(String supplierName) {
-		this.supplierName = supplierName;
+	public void setCustomerName(String customerName) {
+		this.customerName = customerName;
 	}
 
-	public UUID getSupplierTypeId() {
-		return supplierTypeId;
+	public UUID getCustomerTypeId() {
+		return customerTypeId;
 	}
 
-	public void setSupplierTypeId(UUID supplierTypeId) {
-		this.supplierTypeId = supplierTypeId;
+	public void setCustomerTypeId(UUID customerTypeId) {
+		this.customerTypeId = customerTypeId;
 	}
 
 	public String getAddress() {
@@ -125,21 +118,7 @@ public class SupplierInfo {
 		this.address = address;
 	}
 
-	public String getContactPerson() {
-		return contactPerson;
-	}
-
-	public void setContactPerson(String contactPerson) {
-		this.contactPerson = contactPerson;
-	}
-
-	public String getDesignation() {
-		return designation;
-	}
-
-	public void setDesignation(String designation) {
-		this.designation = designation;
-	}
+	
 
 	public String getPhoneNumber() {
 		return phoneNumber;
@@ -179,14 +158,6 @@ public class SupplierInfo {
 
 	public void setStatus(String status) {
 		this.status = status;
-	}
-
-	public SupplierTypeInfo getSupplierTypeInfo() {
-		return supplierTypeInfo;
-	}
-
-	public void setSupplierTypeInfo(SupplierTypeInfo supplierTypeInfo) {
-		this.supplierTypeInfo = supplierTypeInfo;
 	}
 
 	public UUID getCompanyId() {
@@ -229,5 +200,13 @@ public class SupplierInfo {
 		this.updateDateTime = updateDateTime;
 	}
 
+	public CustomerTypeInfo getCustomerTypeInfo() {
+		return customerTypeInfo;
+	}
+
+	public void setCustomerTypeInfo(CustomerTypeInfo customerTypeInfo) {
+		this.customerTypeInfo = customerTypeInfo;
+	}
+	
 	
 }

@@ -10,32 +10,30 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.pms.configure.bean.ControllerPathInfo;
-import com.pms.configure.bean.PagePathInfo;
 import com.pms.model.ItemTypeInfo;
 import com.pms.service.ItemTypeService;
 
 @Controller
-@RequestMapping(ControllerPathInfo.ROOT_PATH_ITEM_TYPE_INFO)
-public class ItemTypeController {
+@RequestMapping("/item")
+public class ItemController {
 
 	@Autowired
 	private ItemTypeService itemTypeService;
 
-	@GetMapping(ControllerPathInfo.ROOT_PATH_ITEM_TYPE_LIST_INFO)
+	@GetMapping("/maintain")
 	public ModelAndView maintain() {
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.addObject("infos", itemTypeService.getAll(null));
-		modelAndView.setViewName(PagePathInfo.PAGE_ITEM_TYPE_INFO);
+		modelAndView.setViewName("setup/item_type_info");
 		return modelAndView;
 	}
 
 	
 
-	@PostMapping(value = ControllerPathInfo.ROOT_PATH_ITEM_TYPE_SAVE_INFO)
+	@PostMapping(value = "/save-item-type")
 	public String saveItemTypes(@Valid @ModelAttribute("itemTypeInfo") ItemTypeInfo info) {
 		itemTypeService.saveOrUpdate(info);
-		return "redirect:"+ControllerPathInfo.ROOT_PATH_ITEM_TYPE_INFO+ControllerPathInfo.ROOT_PATH_ITEM_TYPE_LIST_INFO;
+		return "redirect:/item_type/maintain";
 	}
 
 	

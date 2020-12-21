@@ -18,10 +18,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.pms.service.CompanyService;
+import com.pms.configure.bean.ControllerPathInfo;
 import com.pms.model.Company;
 
 @Controller
-@RequestMapping("/company")
+@RequestMapping(ControllerPathInfo.ROOT_PATH_COMPANY_INFO)
 public class CompanyController {
 
 	@Autowired

@@ -5,7 +5,7 @@
 <link href="${pageContext.request.contextPath}/css/select2.min.css" rel="stylesheet" media="screen">
 <div class="container-fluid">
 	<div class="block-header">
-	    <span style="text-shadow: 2px 2px 2px #aaa;">SUPPLIER LIST</span>
+	    <span style="text-shadow: 2px 2px 2px #aaa;">CUSTOMER LIST</span>
     	
 	</div>
 	<div class="row clearfix">
@@ -19,10 +19,9 @@
 						<thead>
 							<tr>
 								<th class="align-center" style="width: 60px;">SL#</th>
-								<th class="align-center">SUPPLIER CODE</th>		
-								<th class="align-left">SUPPLIER NAME</th>
-								<th class="align-left" style="width: 135px;">CONTACT PERSON</th>
-								<th class="align-leftr" style="width: 135px;">DESIGNATION</th>
+								<th class="align-center">CUSTOMER CODE</th>		
+								<th class="align-left">CUSTOMER NAME</th>
+								<th class="align-leftr" style="width: 135px;">CUSTOMER TYPE</th>
 								<th class="align-center" style="width: 100px;">MOBILE</th>
 								<th class="align-left" style="width: 100px;">EMAIL</th>
 								<th class="align-center" style="width: 100px;">STATUS</th>
@@ -33,10 +32,9 @@
 							<c:forEach var="info" items="${infos}" varStatus="counter">
 							<tr>
 								<td class="align-center">${counter.count}</td>
-								<td class="field_fuel_type align-center">${info.supplierCode}</td>
-								<td class="field_fuel_qty">${info.supplierName}</td>
-								<td class="field_fuel_expense">${info.contactPerson}</td>
-								<td class="field_fuel_load_date ">${info.designation}</td>
+								<td class="field_fuel_type align-center">${info.customerCode}</td>
+								<td class="field_fuel_qty">${info.customerName}</td>
+								<td class="field_fuel_load_date ">${info.customerTypeInfo.typeName}</td>
 								<td class="field_fuel_qty align-center">${info.mobile}</td>
 								<td class="field_fuel_expense">${info.email}</td>
 								<td class="field_fuel_load_date align-center">
@@ -52,12 +50,10 @@
 								</td>
 								<td class="align-center">
 									<input type="hidden" id="row_id" value="${info.id}">
-									<input type="hidden" id="f_supp_code" value="${info.supplierCode}">
-									<input type="hidden" id="f_supp_name" value="${info.supplierName}">
-									<input type="hidden" id="f_type_id" value="${info.supplierTypeId}">
+									<input type="hidden" id="f_supp_code" value="${info.customerCode}">
+									<input type="hidden" id="f_supp_name" value="${info.customerName}">
+									<input type="hidden" id="f_type_id" value="${info.customerTypeId}">
 									<input type="hidden" id="f_address" value="${info.address}">
-									<input type="hidden" id="f_person" value="${info.contactPerson}">
-									<input type="hidden" id="f_desig" value="${info.designation}">
 									<input type="hidden" id="f_phone" value="${info.phoneNumber}">
 									<input type="hidden" id="f_mobile" value="${info.mobile}">
 									<input type="hidden" id="f_email" value="${info.email}">
@@ -75,14 +71,14 @@
 		</div>
 	</div>
 	
-	<div class="modal fade" id="supplierInfoModal" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
+	<div class="modal fade" id="customerInfoModal" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
          <div class="modal-dialog modal-lg" role="document">
              <div class="modal-content">
                  <div class="modal-header bg-blue-grey">
                  	<button type="button" class="mod-cl close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title align-center" id="defaultModalLabel">SUPPLIER INFORMATION</h4>
+                    <h4 class="modal-title align-center" id="defaultModalLabel">CUSTOMER INFORMATION</h4>
                  </div>
-                 <form method="post" id="supplierInfoForm" modelAttribute="supplierInfo">
+                 <form method="post" id="customerInfoForm" modelAttribute="customerInfo">
                  	<div class="modal-body">
                  		<div class="alert-code alert-block alert-danger hidden"></div><br>
                  		<input type="hidden" id="id" name="id" value=""/>
@@ -90,13 +86,13 @@
 	                 		<div class="col-md-6">
                             	<span><b>SUPPLIER NAME :</b></span>
                             	<div class="form-group">
-	                                <input type="text" id="supplierName" name="supplierName" value="" class="form-control" placeholder="Supplier name"  autocomplete="off" required>
+	                                <input type="text" id="customerName" name="customerName" value="" class="form-control" placeholder="Supplier name"  autocomplete="off" required>
                             	</div>
                             </div>
 	                 		<div class="col-md-6">
                             	<span><b>SUPPLIER CODE :</b></span>
                             	<div class="form-group">
-	                                <input type="text" id="supplierCode" maxlength="10" name="supplierCode" value="" class="form-control" placeholder="Supplier Code"  autocomplete="off" required>
+	                                <input type="text" id="customerCode" maxlength="10" name="customerCode" value="" class="form-control"    autocomplete="off" required>
                             	</div>
                             </div>
                             
@@ -105,7 +101,7 @@
 	                 		<div class="col-md-6">
                             	<span><b>SUPPLIER TYPE :</b></span>
                             	<div class="form-group">
-	                                <select  id=supplierTypeId name="supplierTypeId" class="js-example-theme-single form-control" style="width: 100%;" required="required" >
+	                                <select  id=customerTypeId name="customerTypeId" class="js-example-theme-single form-control" style="width: 100%;" required="required" >
 			                        	<option></option>
 			                        <c:forEach var="info" items="${typeInfos}">
 			                           	<option value="${info.id }">${info.typeName}</option>
@@ -113,12 +109,7 @@
 			                        </select>
                             	</div>
                             </div>
-                            <div class="col-md-6">
-                            	<span><b>CONTACT PERSON :</b></span>
-                            	<div class="form-group">
-	                                <input type="text" id="contactPerson" name="contactPerson" value="" class="form-control" placeholder="Contact Person"  autocomplete="off">
-                            	</div>
-                            </div>
+                            
 	                 		
                             
                  		</div>
@@ -133,12 +124,7 @@
                  		</div>
                  		<div class="row">
 	                 		
-                            <div class="col-md-6">
-                            	<span><b>DESIGNATION :</b></span>
-                            	<div class="form-group">
-	                                <input type="text" id="designation" name="designation" value="" class="form-control" placeholder="Designation"  autocomplete="off" >
-                            	</div>
-                            </div>
+                            
                             <div class="col-md-6">
                             	<span><b>MOBILE :</b></span>
                             	<div class="form-group">
@@ -287,7 +273,7 @@ $(".modal-header").on("mousedown", function(mousedownEvt) {
 });
 
 $(function() {
-    $('#supplierCode').keyup(function() {
+    $('#customerCode').keyup(function() {
         this.value = this.value.toUpperCase();
     });
 });
@@ -308,19 +294,17 @@ function add(el) {
 	
 	
 	$("#id").val("");
-	$("#supplierCode").val("");
-	$("#supplierName").val("");
-	$("#supplierTypeId").select2("val", "");
+	$("#customerCode").val("");
+	$("#customerName").val("");
+	$("#customerTypeId").select2("val", "");
 	$("#address").val("");
-	$("#contactPerson").val("");
-	$("#designation").val("");
 	$("#phoneNumber").val("");
 	$("#mobile").val("");
 	$("#email").val("");
 	$("#website").val("");
 	$("#activity_status").prop('checked', false);
 	$('#status').val('N'); 
-    $("#supplierInfoModal").modal();
+    $("#customerInfoModal").modal();
     $(".modal-backdrop.fade.in").off("click");
     $(".modal").off("keydown");
     $(".alert").empty().addClass("hidden");
@@ -330,12 +314,10 @@ function add(el) {
 function edit(el) {
 	
 	var Id = $(el).closest("tr").find("#row_id").val();
-	var supplierCode = $(el).closest("tr").find("#f_supp_code").val();
-	var supplierName = $(el).closest("tr").find("#f_supp_name").val();
-	var supplierTypeId = $(el).closest("tr").find("#f_type_id").val();
+	var customerCode = $(el).closest("tr").find("#f_supp_code").val();
+	var customerName = $(el).closest("tr").find("#f_supp_name").val();
+	var customerTypeId = $(el).closest("tr").find("#f_type_id").val();
 	var address = $(el).closest("tr").find("#f_address").val();
-	var contactPerson=$(el).closest("tr").find("#f_person").val();
-	var designation=$(el).closest("tr").find("#f_desig").val();
 	var phoneNumber=$(el).closest("tr").find("#f_phone").val();
 	var mobile=$(el).closest("tr").find("#f_mobile").val();
 	var email=$(el).closest("tr").find("#f_email").val();
@@ -343,13 +325,10 @@ function edit(el) {
 	var status = $(el).closest('tr').find("#f_status").val();
 	
 	$("#id").val(Id);
-	$("#supplierCode").val(supplierCode);
-	$("#supplierName").val(supplierName);
-	$("#supplierTypeId").select2("val", supplierTypeId);
-	//$("textarea#ExampleMessage").val(result.exampleMessage);
+	$("#customerCode").val(customerCode);
+	$("#customerName").val(customerName);
+	$("#customerTypeId").select2("val", customerTypeId);
 	$("#address").val(address);
-	$("#contactPerson").val(contactPerson);
-	$("#designation").val(designation);
 	$("#phoneNumber").val(phoneNumber);
 	$("#mobile").val(mobile);
 	$("#email").val(email);
@@ -364,25 +343,25 @@ function edit(el) {
 		$('.check-status').text('Inactive');
 	}
 	
-	$("#supplierInfoModal").modal();
+	$("#customerInfoModal").modal();
     $(".modal-backdrop.fade.in").off("click");
     $(".modal").off("keydown");
     $(".alert").empty().addClass("hidden");
     $(".alert-code").empty().addClass("hidden");
 };
 
-$("#supplierInfoForm").submit(function(event){
+$("#customerInfoForm").submit(function(event){
 	event.preventDefault();				
-    var formData = $("#supplierInfoForm").serialize();
+    var formData = $("#customerInfoForm").serialize();
     
     if($(".alert-code").hasClass('hidden')){
     	$.ajax({	
-	    	url : "${pageContext.request.contextPath}/supplier/save-suppliers",
+	    	url : "${pageContext.request.contextPath}/customer/save-customers",
 	        type: 'POST',
 	        data: formData,
 	        async: false,
 	        success: function (data) {				 
-	        	$("#supplierInfoModal").modal('hide');
+	        	$("#customerInfoModal").modal('hide');
 				$('.modal-backdrop').remove();
 				$("#view_page").html(data);
 				sweetAlert("Saved!", "Your data has been Saved.", "success", 1000, false);
