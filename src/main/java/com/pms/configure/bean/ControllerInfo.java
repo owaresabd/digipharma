@@ -1,7 +1,11 @@
 package com.pms.configure.bean;
 
-public class ControllerPathInfo {
+public class ControllerInfo {
 	public static final String ROOT_PATH_COMPANY_INFO = "/company";
+	
+	public static final String ROOT_PATH_DEPARTMENT_INFO = "/department";
+	public static final String DEPARTMENT_LIST_INFO = "/maintain";
+	public static final String DEPARTMENT_SAVE_INFO = "/save-department-info";
 	
 	public static final String ROOT_PATH_ITEM_TYPE_INFO = "/item_type";
 	public static final String ROOT_PATH_ITEM_TYPE_LIST_INFO = "/maintain";

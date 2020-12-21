@@ -10,41 +10,33 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.pms.configure.bean.ControllerInfo;
+import com.pms.configure.bean.PageViewInfo;
 import com.pms.model.DepartmentInfo;
 import com.pms.service.DepartmentService;
 
 @Controller
-@RequestMapping("/department")
+@RequestMapping(ControllerInfo.ROOT_PATH_DEPARTMENT_INFO)
 public class DepartmentController {
 
 	@Autowired
 	private DepartmentService departmentService;
 
-	@GetMapping("/maintain")
+	@GetMapping(ControllerInfo.DEPARTMENT_LIST_INFO)
 	public ModelAndView maintain() {
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.addObject("deptList", departmentService.getAll(null));
-		modelAndView.setViewName("setup/dept_info");
+		modelAndView.setViewName(PageViewInfo.DEPARTMENT_INFO);
 		return modelAndView;
 	}
 
 	
-	@PostMapping(value = "/save-department-info")
+	@PostMapping(value = ControllerInfo.DEPARTMENT_SAVE_INFO)
 	public String saveDepartmentInfo(@Valid @ModelAttribute("departmentInfo") DepartmentInfo info) {
 		departmentService.saveOrUpdate(info);
-		return "redirect:/department/maintain";
+		return "redirect:"+ControllerInfo.ROOT_PATH_DEPARTMENT_INFO+ControllerInfo.DEPARTMENT_LIST_INFO;
 		
 	}
 
-	/*
-	 * @ResponseBody
-	 * 
-	 * @RequestMapping(value = "/validate-deptNo/{deptNo}", method =
-	 * RequestMethod.GET) public WSResponse validateDeptNo(@PathVariable("deptNo")
-	 * String deptNo) { Map<String, String[]> map = new HashMap<>();
-	 * map.put("deptNo", new String[] { (deptNo).toString().trim() }); boolean bool
-	 * = departmentService.validateDeptNo(map); if (!bool) { return new
-	 * WSResponse("true", null, null, null, null, null); } else { return new
-	 * WSResponse("false", null, null, null, null, null); } }
-	 */
+	
 }

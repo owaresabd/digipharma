@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.pms.configure.bean.ControllerPathInfo;
-import com.pms.configure.bean.PagePathInfo;
+import com.pms.configure.bean.ControllerInfo;
+import com.pms.configure.bean.PageViewInfo;
 import com.pms.model.CustomerInfo;
 import com.pms.service.CustomerService;
 import com.pms.service.CustomerTypeService;
@@ -19,7 +19,7 @@ import com.pms.service.CustomerTypeService;
 
 
 @Controller
-@RequestMapping(ControllerPathInfo.ROOT_PATH_CUSTOMER_INFO)
+@RequestMapping(ControllerInfo.ROOT_PATH_CUSTOMER_INFO)
 public class CustomerController {
 	
 	@Autowired
@@ -27,21 +27,21 @@ public class CustomerController {
 	@Autowired
 	private CustomerService customerService;
 
-	@GetMapping(ControllerPathInfo.ROOT_PATH_CUSTOMER_LIST_INFO)
+	@GetMapping(ControllerInfo.ROOT_PATH_CUSTOMER_LIST_INFO)
 	public ModelAndView maintain() {
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.addObject("infos", customerService.getAll(null));
 		modelAndView.addObject("typeInfos", CustomerTypeService.getAll("Y"));
-		modelAndView.setViewName(PagePathInfo.PAGE_CUSTOMER_INFO);
+		modelAndView.setViewName(PageViewInfo.CUSTOMER_INFO);
 		return modelAndView;
 	}
 
 	
 
-	@PostMapping(value = ControllerPathInfo.ROOT_PATH_CUSTOMER_SAVE_INFO)
+	@PostMapping(value = ControllerInfo.ROOT_PATH_CUSTOMER_SAVE_INFO)
 	public String saveCustomers(@Valid @ModelAttribute("customerInfo") CustomerInfo customerInfo) {
 		customerService.saveOrUpdate(customerInfo);
-		return "redirect:"+ControllerPathInfo.ROOT_PATH_CUSTOMER_INFO+ControllerPathInfo.ROOT_PATH_CUSTOMER_LIST_INFO;
+		return "redirect:"+ControllerInfo.ROOT_PATH_CUSTOMER_INFO+ControllerInfo.ROOT_PATH_CUSTOMER_LIST_INFO;
 	}
 
 	

@@ -8,23 +8,23 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.pms.configure.bean.ControllerPathInfo;
-import com.pms.configure.bean.PagePathInfo;
+import com.pms.configure.bean.ControllerInfo;
+import com.pms.configure.bean.PageViewInfo;
 import com.pms.model.CustomerTypeInfo;
 import com.pms.service.CustomerTypeService;
 
 @Controller
-@RequestMapping(ControllerPathInfo.ROOT_PATH_CUSTOMER_TYPE_INFO)
+@RequestMapping(ControllerInfo.ROOT_PATH_CUSTOMER_TYPE_INFO)
 public class CustomerTypeController {
 
 	@Autowired
 	private CustomerTypeService customerTypeService;
 
-	@GetMapping(ControllerPathInfo.ROOT_PATH_CUSTOMER_TYPE_LIST_INFO)
+	@GetMapping(ControllerInfo.ROOT_PATH_CUSTOMER_TYPE_LIST_INFO)
 	public ModelAndView maintain() {
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.addObject("infos", customerTypeService.getAll(null));
-		modelAndView.setViewName(PagePathInfo.PAGE_CUSTOMER_TYPE_INFO);
+		modelAndView.setViewName(PageViewInfo.CUSTOMER_TYPE_INFO);
 		return modelAndView;
 	}
 
@@ -33,7 +33,7 @@ public class CustomerTypeController {
 	@PostMapping(value = "/save-customer-type")
 	public String add(@ModelAttribute("customerTypeInfo") CustomerTypeInfo info) {
 		customerTypeService.saveOrUpdate(info);
-		return "redirect:"+ControllerPathInfo.ROOT_PATH_CUSTOMER_TYPE_INFO+ControllerPathInfo.ROOT_PATH_CUSTOMER_TYPE_LIST_INFO;
+		return "redirect:"+ControllerInfo.ROOT_PATH_CUSTOMER_TYPE_INFO+ControllerInfo.ROOT_PATH_CUSTOMER_TYPE_LIST_INFO;
 	}
 
 	
