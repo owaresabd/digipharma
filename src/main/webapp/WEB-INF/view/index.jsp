@@ -287,7 +287,7 @@
                 <a href="javascript:void(0);" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false"></a>
                 <a href="javascript:void(0);" class="bars"></a>
                 <a class="navbar-brand" style="font-size: 20px;" href="${pageContext.request.contextPath}/index">
-                	<span style="text-shadow: 2px 2px 2px #aaa;"><i><b>&nbsp;&nbsp;&nbsp;&nbsp;</b><b><%-- ${user.companyName} --%>Pharmacy Management System</b></i></span>
+                	<span style="text-shadow: 2px 2px 2px #aaa;"><i><b>&nbsp;&nbsp;&nbsp;&nbsp;</b><b>${user.companyName}<%--Pharmacy Management System --%></b></i></span>
                 </a>
             </div>
             <div class="collapse navbar-collapse m-t-10" id="navbar-collapse">
@@ -451,7 +451,7 @@
 								<i class="material-icons">assignment</i>
 							</div>
 							<div class="content">
-								<div class="text">PENDING CSS REQUEST</div>
+								<div class="text">TOTAL PRODUCT</div>
 								<div class="number count-to"  data-to="0" data-speed="1000" data-fresh-interval="20"></div>
 							</div>
 						</div>
@@ -462,7 +462,7 @@
 								<i class="material-icons">assignment</i>
 							</div>
 							<div class="content">
-								<div class="text">PENDING SAMPLE</div>
+								<div class="text">TOTAL SUPPLIER</div>
 								<div class="number count-to"  data-to="0" data-speed="1000" data-fresh-interval="20"></div>
 							</div>
 						</div>
@@ -473,7 +473,7 @@
 								<i class="material-icons">assignment</i>
 							</div>
 							<div class="content">
-								<div class="text"> PENDING RECEIVE </div>
+								<div class="text"> TOTAL CUSTOMER </div>
 								<div class="number count-to"  data-to="0" data-speed="1000" data-fresh-interval="20"></div>
 							</div>
 						</div>
@@ -484,7 +484,7 @@
 								<i class="material-icons">assignment</i>
 							</div>
 							<div class="content">
-								<div class="text">PENDING DISTRIBUTION</div>
+								<div class="text">TOTAL SALES</div>
 								<div class="number count-to" id="serPenSize" data-to="0" data-speed="1000" data-fresh-interval="20"></div>
 							</div>
 						</div>
@@ -495,7 +495,7 @@
 								<i class="material-icons">assignment</i>
 							</div>
 							<div class="content">
-								<div class="text">PENDING RESULT</div>
+								<div class="text">TOTAL PURCHASE</div>
 								<div class="number count-to"  id="rpExpSize" data-to="0" data-speed="1000" data-fresh-interval="20"></div>
 							</div>
 						</div>
@@ -506,7 +506,7 @@
 							<i class="material-icons">assignment</i>								
 							</div>
 							<div class="content">
-								<div class="text">PENDING VERIFIED</div>
+								<div class="text">DUE AMOUNT</div>
 								<div class="number count-to"  id="insExpSize" data-to="0" data-speed="1000" data-fresh-interval="20"></div>
 							</div>
 						</div>

@@ -18,11 +18,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.pms.service.CompanyService;
-import com.pms.configure.bean.ControllerInfo;
+import com.pms.configure.bean.Router;
 import com.pms.model.Company;
 
 @Controller
-@RequestMapping(ControllerInfo.ROOT_PATH_COMPANY_INFO)
+@RequestMapping(Router.ROOT_PATH_COMPANY_INFO)
 public class CompanyController {
 
 	@Autowired

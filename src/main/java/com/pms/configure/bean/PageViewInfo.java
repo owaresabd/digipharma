@@ -8,8 +8,8 @@ public class PageViewInfo {
 	public static final String ITEM_INFO = "setup/item_info";
 	public static final String CUSTOMER_TYPE_INFO = "setup/customer_type_info";
 	public static final String CUSTOMER_INFO = "setup/customerInfo";
-	public static final String PURCHASE_INFO = "transaction/purchase_info";
-	public static final String SALES_INFO = "transaction/sales_info";
+	public static final String PURCHASE_INFO = "transaction/purchase_infos";
+	public static final String SALES_INFO = "transaction/sales_infos";
 	
 
 }

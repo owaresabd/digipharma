@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.pms.configure.bean.ControllerInfo;
+import com.pms.configure.bean.Router;
 import com.pms.configure.bean.PageViewInfo;
 import com.pms.model.CustomerInfo;
 import com.pms.service.CustomerService;
@@ -19,7 +19,7 @@ import com.pms.service.CustomerTypeService;
 
 
 @Controller
-@RequestMapping(ControllerInfo.ROOT_PATH_CUSTOMER_INFO)
+@RequestMapping(Router.ROOT_PATH_CUSTOMER_INFO)
 public class CustomerController {
 	
 	@Autowired
@@ -27,7 +27,7 @@ public class CustomerController {
 	@Autowired
 	private CustomerService customerService;
 
-	@GetMapping(ControllerInfo.ROOT_PATH_CUSTOMER_LIST_INFO)
+	@GetMapping(Router.CUSTOMER_LIST_INFO)
 	public ModelAndView maintain() {
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.addObject("infos", customerService.getAll(null));
@@ -38,10 +38,10 @@ public class CustomerController {
 
 	
 
-	@PostMapping(value = ControllerInfo.ROOT_PATH_CUSTOMER_SAVE_INFO)
+	@PostMapping(value = Router.CUSTOMER_SAVE_INFO)
 	public String saveCustomers(@Valid @ModelAttribute("customerInfo") CustomerInfo customerInfo) {
 		customerService.saveOrUpdate(customerInfo);
-		return "redirect:"+ControllerInfo.ROOT_PATH_CUSTOMER_INFO+ControllerInfo.ROOT_PATH_CUSTOMER_LIST_INFO;
+		return "redirect:"+Router.ROOT_PATH_CUSTOMER_INFO+Router.CUSTOMER_LIST_INFO;
 	}
 
 	

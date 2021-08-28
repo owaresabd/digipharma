@@ -10,19 +10,19 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.pms.configure.bean.ControllerInfo;
+import com.pms.configure.bean.Router;
 import com.pms.configure.bean.PageViewInfo;
 import com.pms.model.DepartmentInfo;
 import com.pms.service.DepartmentService;
 
 @Controller
-@RequestMapping(ControllerInfo.ROOT_PATH_DEPARTMENT_INFO)
+@RequestMapping(Router.ROOT_PATH_DEPARTMENT_INFO)
 public class DepartmentController {
 
 	@Autowired
 	private DepartmentService departmentService;
 
-	@GetMapping(ControllerInfo.DEPARTMENT_LIST_INFO)
+	@GetMapping(Router.DEPARTMENT_LIST_INFO)
 	public ModelAndView maintain() {
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.addObject("deptList", departmentService.getAll(null));
@@ -31,10 +31,10 @@ public class DepartmentController {
 	}
 
 	
-	@PostMapping(value = ControllerInfo.DEPARTMENT_SAVE_INFO)
+	@PostMapping(value = Router.DEPARTMENT_SAVE_INFO)
 	public String saveDepartmentInfo(@Valid @ModelAttribute("departmentInfo") DepartmentInfo info) {
 		departmentService.saveOrUpdate(info);
-		return "redirect:"+ControllerInfo.ROOT_PATH_DEPARTMENT_INFO+ControllerInfo.DEPARTMENT_LIST_INFO;
+		return "redirect:"+Router.ROOT_PATH_DEPARTMENT_INFO+Router.DEPARTMENT_LIST_INFO;
 		
 	}
 

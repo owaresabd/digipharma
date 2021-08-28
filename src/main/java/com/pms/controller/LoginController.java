@@ -38,6 +38,7 @@ public class LoginController {
 	public ModelAndView index(Map<String, Object> model) {
 		ModelAndView modelAndView = new ModelAndView();
 		User user = userService.getCurrentUser();
+		
 		if (user != null) {
 			List<RolePrivilege> menuList = userService.getAllMenu(user.getTypeId());
 			

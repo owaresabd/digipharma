@@ -13,12 +13,10 @@ public class CountryService {
 	@Autowired
 	private CountryRepository countryRepository;
 
-	public List<CountryInfo> getAllCountry(String status) {
-		return countryRepository.findAllCountry(status);
+	public List<CountryInfo> getAll() {
+		return countryRepository.findAllCountry();
 	}
 
-	public void saveCountryInfos(CountryInfo info) {
-		countryRepository.saveCountryInfos(info);
-	}
+	
 
 }
