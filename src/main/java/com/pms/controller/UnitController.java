@@ -29,10 +29,15 @@ public class UnitController {
 	}
 
 	@PostMapping(value = "/save-unit-info")
-	public String add(@Valid @ModelAttribute("unitInfo") UnitInfo info) {
+	public ModelAndView add(@Valid @ModelAttribute("unitInfo") UnitInfo info) {
+		
+		
+		ModelAndView modelAndView = new ModelAndView();
 		
 		unitService.saveOrUpdate(info);
-		return "redirect:/unit/maintain";
+		modelAndView.addObject("infos", unitService.getAll(null));
+		modelAndView.setViewName("setup/unit_info");
+		return modelAndView;
 	}
 
 }

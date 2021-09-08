@@ -53,9 +53,17 @@ public class ItemController {
 	
 
 	@PostMapping(value = Router.ITEM_SAVE_INFO)
-	public String saveItemInfo(@Valid @ModelAttribute("itemInfo") ItemInfo info) {
+	public ModelAndView saveItemInfo(@Valid @ModelAttribute("itemInfo") ItemInfo info) {
 		itemService.saveOrUpdate(info);
-		return "redirect:"+Router.ROOT_PATH_ITEM_INFO+Router.ITEM_LIST_INFO;
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.addObject("manufacturerInfos", manufacturerService.getAll("Y"));
+		modelAndView.addObject("typeInfos", itemTypeService.getAll("Y"));
+		modelAndView.addObject("genericInfos", genericService.getAll("Y"));
+		modelAndView.addObject("unitInfos", unitService.getAll("Y"));
+		modelAndView.addObject("countryInfos", countryService.getAll());
+		modelAndView.addObject("infos", itemService.getAll(null));
+		modelAndView.setViewName(PageInfo.ITEM_INFO);
+		return modelAndView;
 	}
 
 	

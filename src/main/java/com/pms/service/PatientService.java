@@ -36,8 +36,9 @@ public class PatientService {
 
 	public void saveOrUpdate(PatientInfo info) {
 		User user = userService.getCurrentUser();
+		info.setCompanyId(user.getCompanyId());
+		
 		if (info.getId() == null ) {
-			info.setCompanyId(user.getCompanyId());
 			info.setCreatedBy(user.getId());
 
 		} else {

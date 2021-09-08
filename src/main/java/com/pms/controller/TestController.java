@@ -31,11 +31,15 @@ public class TestController {
 	}
 
 	
-
+   
 	@PostMapping(value = Router.TEST_SAVE_INFO)
-	public String saveOrUpdateTestInfo(@Valid @ModelAttribute("testInfo") TestInfo info) {
+	public ModelAndView saveOrUpdateTestInfo(@Valid @ModelAttribute("testInfo") TestInfo info) {
 		testService.saveOrUpdate(info);
-		return "redirect:"+Router.ROOT_PATH_TEST_INFO+Router.TEST_LIST_INFO;
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.addObject("infos", testService.getAll(null));
+		modelAndView.setViewName(PageInfo.TEST_INFO);
+		
+		return modelAndView;
 	}
 
 }

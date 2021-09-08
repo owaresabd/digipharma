@@ -1,17 +1,23 @@
 package com.pms.model;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.UUID;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
+import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.Type;
+import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.data.annotation.CreatedBy;
 
 @Entity
 @Table(name = "pms_employee_infos")
@@ -28,12 +34,11 @@ public class EmployeeInfo {
 
 	@Column(name = "emp_name")
 	private String empName;
-
-	@Column(name = "desig_id")
-	private UUID desigId;
-
-	@Transient
-	private String desigName;
+	
+	
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name="desig_id", nullable=false)
+	private DesignationInfo designationInfo;
 
 	@Column(name = "father_name")
 	private String fatherName;
@@ -75,6 +80,26 @@ public class EmployeeInfo {
 
 	@Column(name = "status")
 	private String status;
+	
+	@Column(name = "company_id",updatable=false)
+	private UUID companyId;
+	
+	@Column(name = "created_by",updatable=false)
+	@CreatedBy
+	private UUID createdBy;
+	
+	@Column(name = "created_at", updatable=false)
+	@CreationTimestamp
+	private LocalDateTime createDateTime;
+	
+	@Column(name = "updated_by",insertable=false)
+	@CreatedBy
+	private UUID updatedBy;
+	
+	@Column(name = "updated_at",insertable=false)
+	@UpdateTimestamp
+	private LocalDateTime updateDateTime;
+	
 
 	public UUID getId() {
 		return id;
@@ -100,20 +125,15 @@ public class EmployeeInfo {
 		this.empName = empName;
 	}
 
-	public UUID getDesigId() {
-		return desigId;
+	
+	
+
+	public DesignationInfo getDesignationInfo() {
+		return designationInfo;
 	}
 
-	public void setDesigId(UUID desigId) {
-		this.desigId = desigId;
-	}
-
-	public String getDesigName() {
-		return desigName;
-	}
-
-	public void setDesigName(String desigName) {
-		this.desigName = desigName;
+	public void setDesignationInfo(DesignationInfo designationInfo) {
+		this.designationInfo = designationInfo;
 	}
 
 	public String getFatherName() {
@@ -218,6 +238,46 @@ public class EmployeeInfo {
 
 	public void setStatus(String status) {
 		this.status = status;
+	}
+
+	public UUID getCompanyId() {
+		return companyId;
+	}
+
+	public void setCompanyId(UUID companyId) {
+		this.companyId = companyId;
+	}
+
+	public UUID getCreatedBy() {
+		return createdBy;
+	}
+
+	public void setCreatedBy(UUID createdBy) {
+		this.createdBy = createdBy;
+	}
+
+	public LocalDateTime getCreateDateTime() {
+		return createDateTime;
+	}
+
+	public void setCreateDateTime(LocalDateTime createDateTime) {
+		this.createDateTime = createDateTime;
+	}
+
+	public UUID getUpdatedBy() {
+		return updatedBy;
+	}
+
+	public void setUpdatedBy(UUID updatedBy) {
+		this.updatedBy = updatedBy;
+	}
+
+	public LocalDateTime getUpdateDateTime() {
+		return updateDateTime;
+	}
+
+	public void setUpdateDateTime(LocalDateTime updateDateTime) {
+		this.updateDateTime = updateDateTime;
 	}
 
 }

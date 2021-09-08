@@ -37,9 +37,13 @@ public class SupplierController {
 	
 
 	@PostMapping(value = "/save-suppliers")
-	public String saveSuppliers(@Valid @ModelAttribute("supplierInfo") SupplierInfo supplierInfo) {
+	public ModelAndView saveSuppliers(@Valid @ModelAttribute("supplierInfo") SupplierInfo supplierInfo) {
 		supplierService.saveOrUpdate(supplierInfo);
-		return "redirect:/supplier/maintain";
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.addObject("infos", supplierService.getAll(null));
+		modelAndView.addObject("typeInfos", supplierTypeService.getAll("Y"));
+		modelAndView.setViewName("setup/supplierInfo");
+		return modelAndView;
 	}
 
 	

@@ -45,6 +45,7 @@ public class SupplierService {
 			info.setCreatedBy(user.getId());
 
 		} else {
+			info.setCompanyId(user.getCompanyId());
 			info.setUpdatedBy(user.getId());
 		}
 		supplierRepository.save(info);

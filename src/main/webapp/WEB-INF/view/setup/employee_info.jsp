@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <spring:message code=""/>
 <link href="${pageContext.request.contextPath}/css/select2.min.css" rel="stylesheet" media="screen">
 
@@ -40,7 +41,7 @@ textarea {
 								<td class="field_driver_id align-center">${counter.count}</td>
 								<td class="field_driver_id">${info.udEmpNo}</td>
 								<td class="field_driver_name_en">${info.empName}</td>
-								<td class="field_contact_no">${info.desigName}</td>
+								<td class="field_contact_no">${info.designationInfo.designationName}</td>
 								<td class="field_type_status align-center" width="100px">
 									<c:choose>
 									    <c:when test="${info.status =='Y'}">
@@ -55,10 +56,12 @@ textarea {
 									<input type="hidden" id="row_id" value="${info.id}">
 									<input type="hidden" id="e_udEmpNo" value="${info.udEmpNo}">
 									<input type="hidden" id="e_empName" value="${info.empName}">
-									<input type="hidden" id="e_desigId" value="${info.desigId}">
+									<input type="hidden" id="e_desigId" value="${info.designationInfo.id}">
 									<input type="hidden" id="e_fatherName" value="${info.fatherName}">
 									<input type="hidden" id="e_motherName" value="${info.motherName}">
-									<input type="hidden" id="e_dob" value="${info.dob}">
+									<fmt:formatDate var="dob" value="${info.dob}" pattern="yyyy-MM-dd"/>
+									
+									<input type="hidden" id="e_dob" value="${dob}">
 									<input type="hidden" id="e_gender" value="${info.genderId}">
 									<input type="hidden" id="e_bloodGroup" value="${info.bloodGroup}">
 									<input type="hidden" id="e_maritalStatus" value="${info.maritalStatus}">
@@ -67,7 +70,8 @@ textarea {
 									<input type="hidden" id="e_mobileNo" value="${info.mobileNo}">
 									<input type="hidden" id="e_email" value="${info.email}">
 									<input type="hidden" id="e_qualification" value="${info.qualification}">
-									<input type="hidden" id="e_joiningDate" value="${info.joiningDate}">
+									<fmt:formatDate var="joiningDate" value="${info.joiningDate}" pattern="yyyy-MM-dd"/>
+									<input type="hidden" id="e_joiningDate" value="${joiningDate}">
 									<input type="hidden" id="e_status" value="${info.status}">
 									<a class="btn-edit btn btn-xs" onclick="edit(this)"><i class="material-icons">mode_edit</i></a>
 								</td>
@@ -87,7 +91,7 @@ textarea {
                  	<button type="button" class="mod-cl close load" data-dismiss="modal" aria-hidden="true">&times;</button>
                     <h4 class="modal-title align-center" id="defaultModalLabel">EMPLOYEE INFORMATION</h4>
                  </div>
-                <form method="post" id="employeeInfoForm" enctype="multipart/form-data" onkeypress="if (event.keyCode == 13) { return false; }">
+                <form method="post" id="employeeInfoForm" modelAttribute="employeeInfo" onkeypress="if (event.keyCode == 13) { return false; }">
               	<div class="modal-body div-content m-t--15">
                 	<div class="alert-code alert-block alert-danger hidden"></div><br>
                  	<!-- Nav tabs -->
@@ -113,7 +117,7 @@ textarea {
 									<span><b>Designation :</b> <span style="color:red">*</span></span>
 	
 									<div class="form-group">
-										<select  id=desigId name="desigId" class="js-example-theme-single form-control" style="width: 100%;" required="required" >
+										<select  id=desigId name="designationInfo" class="js-example-theme-single form-control" style="width: 100%;" required="required" >
 			                        	<option></option>
 			                        <c:forEach var="desigInfo" items="${desigInfos}">
 			                           	<option value="${desigInfo.id }">${desigInfo.designationName}</option>
@@ -493,7 +497,7 @@ function edit(el) {
     
 };
 
-$('#udEmpNo').change(function() {
+/* $('#udEmpNo').change(function() {
 	var udEmpNo = $("#udEmpNo").val();
 	$.get( "${pageContext.request.contextPath}/employee/validate-udEmpNo/" + udEmpNo, 
 	function( data ) {
@@ -507,7 +511,7 @@ $('#udEmpNo').change(function() {
 			console.log("no duplicate employee id");
 		}
 	});
-});
+}); */
 
 
 

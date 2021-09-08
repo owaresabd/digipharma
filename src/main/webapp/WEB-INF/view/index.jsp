@@ -425,7 +425,7 @@
             <!-- Footer -->
             <div class="legal">
                 <div class="copyright">
-                    &reg; &copy; <a href="javascript:void(0);">ATI :: LIMS</a>
+                    &reg; &copy; <a href="javascript:void(0);">CODERS :: PMS</a>
                 </div>
             </div>
             <!-- #Footer -->

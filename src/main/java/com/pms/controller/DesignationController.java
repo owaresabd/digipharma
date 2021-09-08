@@ -29,10 +29,14 @@ public class DesignationController {
 	}
 
 	@PostMapping(value = "/save-designation-info")
-	public String saveDesignationInfo(@Valid @ModelAttribute("designationInfo") DesignationInfo info) {
+	public ModelAndView saveDesignationInfo(@Valid @ModelAttribute("designationInfo") DesignationInfo info) {
+		
+		ModelAndView modelAndView = new ModelAndView();
 		designationService.saveOrUpdate(info);
 
-		return "redirect:/designation/maintain";
+		modelAndView.addObject("designationList", designationService.getAll(null));
+		modelAndView.setViewName("setup/designation_info");
+		return modelAndView;
 	}
 
 }

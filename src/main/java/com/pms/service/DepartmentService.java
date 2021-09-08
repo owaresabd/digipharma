@@ -42,8 +42,9 @@ public class DepartmentService {
 
 	public void saveOrUpdate(DepartmentInfo info) {
 		User user = userService.getCurrentUser();
+		info.setCompanyId(user.getCompanyId());
 		if (info.getId() == null ) {
-			info.setCompanyId(user.getCompanyId());
+			
 			info.setCreatedBy(user.getId());
 
 		} else {
@@ -54,12 +55,5 @@ public class DepartmentService {
 	}
 	
 
-	/*
-	 * public boolean validateDeptNo(Map<String, String[]> requestMap) { String
-	 * deptNo = requestMap.get("deptNo")[0]; List<DepartmentInfo>
-	 * entityTransDtlsList = departmentRepository.validateDeptNo(deptNo); if
-	 * (entityTransDtlsList.size() == 0) { return true; }
-	 * 
-	 * return false; }
-	 */
+	
 }

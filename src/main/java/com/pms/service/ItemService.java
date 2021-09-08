@@ -42,11 +42,13 @@ public class ItemService {
 
 	public void saveOrUpdate(ItemInfo info) {
 		User user = userService.getCurrentUser();
+		info.setCompanyId(user.getCompanyId());
+		
 		if (info.getId() == null ) {
-			info.setCompanyId(user.getCompanyId());
 			info.setCreatedBy(user.getId());
 
 		} else {
+			
 			info.setUpdatedBy(user.getId());
 		}
 		itemRepository.save(info);

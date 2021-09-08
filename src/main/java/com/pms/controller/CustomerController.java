@@ -39,9 +39,14 @@ public class CustomerController {
 	
 
 	@PostMapping(value = Router.CUSTOMER_SAVE_INFO)
-	public String saveCustomers(@Valid @ModelAttribute("customerInfo") CustomerInfo customerInfo) {
+	public ModelAndView saveCustomers(@Valid @ModelAttribute("customerInfo") CustomerInfo customerInfo) {
+		
+		ModelAndView modelAndView = new ModelAndView();
 		customerService.saveOrUpdate(customerInfo);
-		return "redirect:"+Router.ROOT_PATH_CUSTOMER_INFO+Router.CUSTOMER_LIST_INFO;
+		modelAndView.addObject("infos", customerService.getAll(null));
+		modelAndView.addObject("typeInfos", CustomerTypeService.getAll("Y"));
+		modelAndView.setViewName(PageInfo.CUSTOMER_INFO);
+		return modelAndView;
 	}
 
 	

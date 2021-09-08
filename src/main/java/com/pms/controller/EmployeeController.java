@@ -1,18 +1,16 @@
 package com.pms.controller;
 
-import java.io.IOException;
-import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.pms.model.EmployeeInfo;
 import com.pms.service.DesignationService;
 import com.pms.service.EmployeeService;
 
@@ -26,7 +24,7 @@ public class EmployeeController {
 	@Autowired
 	private EmployeeService employeeService;
 	
-	@RequestMapping("/maintain")
+	@GetMapping("/maintain")
 	public ModelAndView maintain() {
 		ModelAndView modelAndView = new ModelAndView();
 		
@@ -37,12 +35,10 @@ public class EmployeeController {
 	}
 	
 	
-	@ResponseBody
-	@RequestMapping(value = "/save-employee-info", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ModelAndView saveEmployeeInfo(HttpServletRequest request) throws IOException {
+	@PostMapping(value = "/save-employee-info")
+	public ModelAndView saveEmployeeInfo(@Valid @ModelAttribute("employeeInfo") EmployeeInfo info) {
 		ModelAndView modelAndView = new ModelAndView();
-		Map<String, String[]> requestMap = request.getParameterMap();
-		employeeService.saveEmployeeInfos(requestMap);
+		employeeService.saveOrUpdate(info);
 		modelAndView.addObject("employeeInfos", employeeService.getAll(null));
 		modelAndView.addObject("desigInfos", designationService.getAll("Y"));
 		modelAndView.setViewName("setup/employee_info");

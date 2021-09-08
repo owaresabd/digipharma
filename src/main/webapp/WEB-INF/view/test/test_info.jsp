@@ -172,19 +172,6 @@ input, textarea {
 
 <script src="${pageContext.request.contextPath}/js/pages/tables/jquery-datatable.js"></script>		
 <script>
-/* function chngLang(el){
-	var link = $(el).attr('id');
-	$.ajax({
-		async : false,
-		url : link ,
-		success : function(result) {
-			$("#view_page").html(result);
-		},
-		error: function(){
-			console.log("this employee has no user id.");
-	  	}
-	});
-} */
 
 $(".modal-header").on("mousedown", function(mousedownEvt) {
     var $draggable = $(this);

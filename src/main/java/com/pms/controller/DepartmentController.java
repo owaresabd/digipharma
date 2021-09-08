@@ -32,9 +32,13 @@ public class DepartmentController {
 
 	
 	@PostMapping(value = Router.DEPARTMENT_SAVE_INFO)
-	public String saveDepartmentInfo(@Valid @ModelAttribute("departmentInfo") DepartmentInfo info) {
+	public ModelAndView saveDepartmentInfo(@Valid @ModelAttribute("departmentInfo") DepartmentInfo info) {
+		
+		ModelAndView modelAndView = new ModelAndView();
 		departmentService.saveOrUpdate(info);
-		return "redirect:"+Router.ROOT_PATH_DEPARTMENT_INFO+Router.DEPARTMENT_LIST_INFO;
+		modelAndView.addObject("deptList", departmentService.getAll(null));
+		modelAndView.setViewName(PageInfo.DEPARTMENT_INFO);
+		return modelAndView;
 		
 	}
 

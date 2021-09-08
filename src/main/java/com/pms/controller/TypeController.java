@@ -29,10 +29,13 @@ public class TypeController {
 	}
 
 	@PostMapping(value = "/save-generic-info")
-	public String add(@Valid @ModelAttribute("genericInfo") GenericInfo info) {
+	public ModelAndView add(@Valid @ModelAttribute("genericInfo") GenericInfo info) {
 		
 		genericService.saveOrUpdate(info);
-		return "redirect:/generic/maintain";
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.addObject("infos", genericService.getAll(null));
+		modelAndView.setViewName("setup/generic_info");
+		return modelAndView;
 	}
 
 }

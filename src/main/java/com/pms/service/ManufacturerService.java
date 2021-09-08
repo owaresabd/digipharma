@@ -43,8 +43,9 @@ import com.pms.repository.ManufacturerRepository;
 
 		public void saveOrUpdate(ManufacturerInfo info) {
 			User user = userService.getCurrentUser();
+			info.setCompanyId(user.getCompanyId());
 			if (info.getId() == null ) {
-				info.setCompanyId(user.getCompanyId());
+				
 				info.setCreatedBy(user.getId());
 
 			} else {
@@ -55,13 +56,5 @@ import com.pms.repository.ManufacturerRepository;
 		}
 		
 
-		/*
-		 * public boolean validateDesignationNo(Map<String, String[]> requestMap) {
-		 * String designationNo = requestMap.get("designationNo")[0];
-		 * List<DesignationInfo> entityTransDtlsList =
-		 * designationRepository.validateDesignationNo(designationNo); if
-		 * (entityTransDtlsList.size() == 0) { return true; }
-		 * 
-		 * return false; }
-		 */
+		
 	}

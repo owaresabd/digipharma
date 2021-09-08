@@ -29,9 +29,13 @@ public class ManufacturerController {
 	}
 
 	@PostMapping(value = "/save-manufacturer-info")
-	public String  saveManufactureInfo(@Valid @ModelAttribute("manufacturerInfo") ManufacturerInfo info) {
+	public ModelAndView  saveManufactureInfo(@Valid @ModelAttribute("manufacturerInfo") ManufacturerInfo info) {
+		
+		ModelAndView modelAndView = new ModelAndView();
 		manufacturerService.saveOrUpdate(info);
-		return "redirect:/manufacturer/maintain";
+		modelAndView.addObject("infos", manufacturerService.getAll(null));
+		modelAndView.setViewName("setup/manufacturer_info");
+		return modelAndView;
 	}
 
 	

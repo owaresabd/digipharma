@@ -19,18 +19,18 @@ public class TestService {
 	@Autowired
 	private IUserService userService;
 	@Autowired
-	private TestRepository investigationRepository;
+	private TestRepository testRepository;
 
 	public List<TestInfo> getAll(String status) {
 		User user = userService.getCurrentUser();
 		if (status != null) {
-			return investigationRepository.findAll().stream()
+			return testRepository.findAll().stream()
 					.filter(info -> info.getStatus().equals(status) && info.getCompanyId().equals(user.getCompanyId()))
 					.sorted(Comparator.comparing(c -> c.getTestName(), String.CASE_INSENSITIVE_ORDER))
 					.collect(Collectors.toList());
 
 		} else {
-			return investigationRepository.findAll().stream()
+			return testRepository.findAll().stream()
 					.filter(info ->info.getCompanyId().equals(user.getCompanyId()))
 					.sorted(Comparator.comparing(c -> c.getTestName(), String.CASE_INSENSITIVE_ORDER))
 					.collect(Collectors.toList());
@@ -42,14 +42,16 @@ public class TestService {
 
 	public void saveOrUpdate(TestInfo info) {
 		User user = userService.getCurrentUser();
+		System.out.println(user.getCompanyId());
 		if (info.getId() == null ) {
 			info.setCompanyId(user.getCompanyId());
 			info.setCreatedBy(user.getId());
 
 		} else {
 			info.setUpdatedBy(user.getId());
+			info.setCompanyId(user.getCompanyId());
 		}
-		investigationRepository.save(info);
+		testRepository.save(info);
 		
 	}
 	

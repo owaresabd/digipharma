@@ -45,6 +45,7 @@ public class CustomerService {
 			info.setCreatedBy(user.getId());
 
 		} else {
+			info.setCompanyId(user.getCompanyId());
 			info.setUpdatedBy(user.getId());
 		}
 		customerRepository.save(info);

@@ -37,20 +37,25 @@ public class ItemInfo {
 	@Column(name = "item_code")
 	private String itemCode;
 	
-	@Column(name = "generic_id")
-	private UUID genericId;
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name="generic_id", nullable=false)
+	private GenericInfo genericInfo; 
 	
-	@Column(name = "type_id")
-	private UUID typeId;
+	@ManyToOne(fetch = FetchType.LAZY) 
+    @JoinColumn(name = "type_id", referencedColumnName = "id", insertable = false, updatable = false)
+    private ItemTypeInfo itemTypeInfo;
 	
-	@Column(name = "manufacturer_id")
-	private UUID manufacturerId;
+	@ManyToOne(fetch = FetchType.LAZY) 
+    @JoinColumn(name = "manufacturer_id", referencedColumnName = "id", insertable = false, updatable = false)
+    private ManufacturerInfo manufacturerInfo;
 	
-	@Column(name = "country_id")
-	private UUID countryId;
+	@ManyToOne(fetch = FetchType.LAZY) 
+    @JoinColumn(name = "unit_id", referencedColumnName = "id", insertable = false, updatable = false)
+    private UnitInfo unitInfo;
 	
-	@Column(name = "unit_id")
-	private UUID unitId;
+	@ManyToOne(fetch = FetchType.LAZY) 
+    @JoinColumn(name = "country_id", referencedColumnName = "id", insertable = false, updatable = false)
+    private CountryInfo countryInfo;
 	
 	@Column(name = "purchase_price",precision=10, scale=2,nullable = true)
 	private BigDecimal purchasePrice;
@@ -88,26 +93,6 @@ public class ItemInfo {
 	@Column(name = "updated_at",insertable=false)
 	@UpdateTimestamp
 	private LocalDateTime updateDateTime;
-	
-	@ManyToOne(fetch = FetchType.LAZY) 
-    @JoinColumn(name = "generic_id", referencedColumnName = "id",insertable = false, updatable = false)
-    private GenericInfo genericInfo;
-	
-	@ManyToOne(fetch = FetchType.LAZY) 
-    @JoinColumn(name = "type_id", referencedColumnName = "id", insertable = false, updatable = false)
-    private ItemTypeInfo itemTypeInfo;
-	
-	@ManyToOne(fetch = FetchType.LAZY) 
-    @JoinColumn(name = "manufacturer_id", referencedColumnName = "id", insertable = false, updatable = false)
-    private ManufacturerInfo manufacturerInfo;
-	
-	@ManyToOne(fetch = FetchType.LAZY) 
-    @JoinColumn(name = "unit_id", referencedColumnName = "id", insertable = false, updatable = false)
-    private UnitInfo unitInfo;
-	
-	@ManyToOne(fetch = FetchType.LAZY) 
-    @JoinColumn(name = "country_id", referencedColumnName = "id", insertable = false, updatable = false)
-    private CountryInfo countryInfo;
 
 	public UUID getId() {
 		return id;
@@ -141,23 +126,37 @@ public class ItemInfo {
 		this.itemCode = itemCode;
 	}
 
-	public UUID getGenericId() {
-		return genericId;
+	public GenericInfo getGenericInfo() {
+		return genericInfo;
 	}
 
-	public void setGenericId(UUID genericId) {
-		this.genericId = genericId;
+	public void setGenericInfo(GenericInfo genericInfo) {
+		this.genericInfo = genericInfo;
 	}
 
-	public UUID getTypeId() {
-		return typeId;
+	public ItemTypeInfo getItemTypeInfo() {
+		return itemTypeInfo;
 	}
 
-	public void setTypeId(UUID typeId) {
-		this.typeId = typeId;
+	public void setItemTypeInfo(ItemTypeInfo itemTypeInfo) {
+		this.itemTypeInfo = itemTypeInfo;
 	}
 
-	
+	public ManufacturerInfo getManufacturerInfo() {
+		return manufacturerInfo;
+	}
+
+	public void setManufacturerInfo(ManufacturerInfo manufacturerInfo) {
+		this.manufacturerInfo = manufacturerInfo;
+	}
+
+	public UnitInfo getUnitInfo() {
+		return unitInfo;
+	}
+
+	public void setUnitInfo(UnitInfo unitInfo) {
+		this.unitInfo = unitInfo;
+	}
 
 	public CountryInfo getCountryInfo() {
 		return countryInfo;
@@ -166,34 +165,6 @@ public class ItemInfo {
 	public void setCountryInfo(CountryInfo countryInfo) {
 		this.countryInfo = countryInfo;
 	}
-
-	public UUID getCountryId() {
-		return countryId;
-	}
-
-	public void setCountryId(UUID countryId) {
-		this.countryId = countryId;
-	}
-
-	public UUID getManufacturerId() {
-		return manufacturerId;
-	}
-
-	public void setManufacturerId(UUID manufacturerId) {
-		this.manufacturerId = manufacturerId;
-	}
-
-	public UUID getUnitId() {
-		return unitId;
-	}
-
-	public void setUnitId(UUID unitId) {
-		this.unitId = unitId;
-	}
-
-	
-
-	
 
 	public BigDecimal getPurchasePrice() {
 		return purchasePrice;
@@ -282,38 +253,12 @@ public class ItemInfo {
 	public void setUpdateDateTime(LocalDateTime updateDateTime) {
 		this.updateDateTime = updateDateTime;
 	}
+	
+	
+	
+	
 
-	public GenericInfo getGenericInfo() {
-		return genericInfo;
-	}
-
-	public void setGenericInfo(GenericInfo genericInfo) {
-		this.genericInfo = genericInfo;
-	}
-
-	public ItemTypeInfo getItemTypeInfo() {
-		return itemTypeInfo;
-	}
-
-	public void setItemTypeInfo(ItemTypeInfo itemTypeInfo) {
-		this.itemTypeInfo = itemTypeInfo;
-	}
-
-	public ManufacturerInfo getManufacturerInfo() {
-		return manufacturerInfo;
-	}
-
-	public void setManufacturerInfo(ManufacturerInfo manufacturerInfo) {
-		this.manufacturerInfo = manufacturerInfo;
-	}
-
-	public UnitInfo getUnitInfo() {
-		return unitInfo;
-	}
-
-	public void setUnitInfo(UnitInfo unitInfo) {
-		this.unitInfo = unitInfo;
-	}
+	
 	
 	
 

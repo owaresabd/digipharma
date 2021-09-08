@@ -31,9 +31,15 @@ public class CustomerTypeController {
 	
 
 	@PostMapping(value = "/save-customer-type")
-	public String add(@ModelAttribute("customerTypeInfo") CustomerTypeInfo info) {
+	public ModelAndView add(@ModelAttribute("customerTypeInfo") CustomerTypeInfo info) {
+		
+		ModelAndView modelAndView = new ModelAndView();
+		
 		customerTypeService.saveOrUpdate(info);
-		return "redirect:"+Router.ROOT_PATH_CUSTOMER_TYPE_INFO+Router.CUSTOMER_TYPE_LIST_INFO;
+		
+		modelAndView.addObject("infos", customerTypeService.getAll(null));
+		modelAndView.setViewName(PageInfo.CUSTOMER_TYPE_INFO);
+		return modelAndView;
 	}
 
 	

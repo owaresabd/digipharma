@@ -47,6 +47,7 @@ public class ItemTypeService {
 			info.setCreatedBy(user.getId());
 
 		} else {
+			info.setCompanyId(user.getCompanyId());
 			info.setUpdatedBy(user.getId());
 		}
 		itemTypeRepository.save(info);
@@ -54,13 +55,5 @@ public class ItemTypeService {
 	}
 	
 
-	/*
-	 * public boolean validateDesignationNo(Map<String, String[]> requestMap) {
-	 * String designationNo = requestMap.get("designationNo")[0];
-	 * List<DesignationInfo> entityTransDtlsList =
-	 * designationRepository.validateDesignationNo(designationNo); if
-	 * (entityTransDtlsList.size() == 0) { return true; }
-	 * 
-	 * return false; }
-	 */
+	
 }

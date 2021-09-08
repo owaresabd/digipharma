@@ -35,9 +35,13 @@ public class PatientController {
 	
 	
 	@PostMapping(value = Router.PATIENT_SAVE_INFO)
-	public String saveOrUpdatePatientInfo(@Valid @ModelAttribute("patientInfo") PatientInfo info) {
+	public ModelAndView saveOrUpdatePatientInfo(@Valid @ModelAttribute("patientInfo") PatientInfo info) {
+		
+		ModelAndView modelAndView = new ModelAndView();
 		patientService.saveOrUpdate(info);
-		return "redirect:"+Router.ROOT_PATH_PATIENT_INFO+Router.PATIENT_LIST_INFO;
+		modelAndView.addObject("info", patientService.getAll());
+		modelAndView.setViewName(PageInfo.PATIENT_INFO);
+		return modelAndView;
 	}
 
 	
