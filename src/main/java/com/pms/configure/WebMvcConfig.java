@@ -1,7 +1,5 @@
 package com.pms.configure;
 
-import java.io.File;
-
 import javax.servlet.MultipartConfigElement;
 
 import org.springframework.boot.web.servlet.MultipartConfigFactory;

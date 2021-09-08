@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.pms.configure.bean.Router;
-import com.pms.configure.bean.PageViewInfo;
+import com.pms.configure.bean.PageInfo;
 import com.pms.model.CustomerTypeInfo;
 import com.pms.service.CustomerTypeService;
 
@@ -24,7 +24,7 @@ public class CustomerTypeController {
 	public ModelAndView maintain() {
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.addObject("infos", customerTypeService.getAll(null));
-		modelAndView.setViewName(PageViewInfo.CUSTOMER_TYPE_INFO);
+		modelAndView.setViewName(PageInfo.CUSTOMER_TYPE_INFO);
 		return modelAndView;
 	}
 

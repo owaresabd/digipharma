@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.pms.configure.bean.Router;
-import com.pms.configure.bean.PageViewInfo;
+import com.pms.configure.bean.PageInfo;
 import com.pms.model.ItemTypeInfo;
 import com.pms.service.ItemTypeService;
 
@@ -26,7 +26,7 @@ public class ItemTypeController {
 	public ModelAndView maintain() {
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.addObject("infos", itemTypeService.getAll(null));
-		modelAndView.setViewName(PageViewInfo.ITEM_TYPE_INFO);
+		modelAndView.setViewName(PageInfo.ITEM_TYPE_INFO);
 		return modelAndView;
 	}
 

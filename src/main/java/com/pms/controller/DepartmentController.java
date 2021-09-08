@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.pms.configure.bean.Router;
-import com.pms.configure.bean.PageViewInfo;
+import com.pms.configure.bean.PageInfo;
 import com.pms.model.DepartmentInfo;
 import com.pms.service.DepartmentService;
 
@@ -26,7 +26,7 @@ public class DepartmentController {
 	public ModelAndView maintain() {
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.addObject("deptList", departmentService.getAll(null));
-		modelAndView.setViewName(PageViewInfo.DEPARTMENT_INFO);
+		modelAndView.setViewName(PageInfo.DEPARTMENT_INFO);
 		return modelAndView;
 	}
 

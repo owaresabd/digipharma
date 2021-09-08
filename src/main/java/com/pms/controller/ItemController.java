@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.pms.configure.bean.Router;
-import com.pms.configure.bean.PageViewInfo;
+import com.pms.configure.bean.PageInfo;
 import com.pms.model.ItemInfo;
 import com.pms.service.CountryService;
 import com.pms.service.GenericService;
@@ -46,7 +46,7 @@ public class ItemController {
 		modelAndView.addObject("unitInfos", unitService.getAll("Y"));
 		modelAndView.addObject("countryInfos", countryService.getAll());
 		modelAndView.addObject("infos", itemService.getAll(null));
-		modelAndView.setViewName(PageViewInfo.ITEM_INFO);
+		modelAndView.setViewName(PageInfo.ITEM_INFO);
 		return modelAndView;
 	}
 
