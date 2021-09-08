@@ -44,5 +44,13 @@ public class Router {
 	public static final String ROOT_PATH_PATIENT_INFO = "/patient";
 	public static final String PATIENT_LIST_INFO = "/maintain";
 	public static final String PATIENT_SAVE_INFO = "/save-patient-info";
+	
+	public static final String ROOT_PATH_SPECIALITY_INFO = "/speciality";
+	public static final String SPECIALITY_LIST_INFO = "/maintain";
+	public static final String SPECIALITY_SAVE_INFO = "/save-speciality-info";
+	
+	public static final String ROOT_PATH_DOCTOR_INFO = "/doctor";
+	public static final String DOCTOR_LIST_INFO = "/maintain";
+	public static final String DOCTOR_SAVE_INFO = "/save-doctor-info";
 
 }

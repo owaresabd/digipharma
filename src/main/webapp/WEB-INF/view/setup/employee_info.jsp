@@ -338,7 +338,7 @@ input, textarea {
 }
 </style>
 		
- <script src="${pageContext.request.contextPath}/js/bootstrap-datepicker.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/bootstrap-datepicker.min.js"></script>
 <script src="${pageContext.request.contextPath}/js/select2.min.js"></script> 
 <script src="${pageContext.request.contextPath}/js/pages/tables/jquery-datatable.js"></script>
 <script>

@@ -12,42 +12,34 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.pms.configure.bean.PageInfo;
 import com.pms.configure.bean.Router;
-import com.pms.model.PatientInfo;
-import com.pms.service.PatientService;
-
-
+import com.pms.model.SpecialityInfo;
+import com.pms.service.SpecialityService;
 
 @Controller
-@RequestMapping(Router.ROOT_PATH_PATIENT_INFO )
-public class PatientController {
-	
+@RequestMapping(Router.ROOT_PATH_SPECIALITY_INFO)
+public class SpecialityController {
+
 	@Autowired
-	private PatientService patientService;
-	
-	@GetMapping(Router.PATIENT_LIST_INFO)
+	private SpecialityService specialityService;
+
+	@GetMapping(Router.SPECIALITY_LIST_INFO)
 	public ModelAndView maintain() {
 		ModelAndView modelAndView = new ModelAndView();
-		
-		modelAndView.addObject("infos", patientService.getAll());
-		modelAndView.setViewName(PageInfo.PATIENT_INFO);
+		modelAndView.addObject("infos", specialityService.getAll(null));
+		modelAndView.setViewName(PageInfo.SPECIALITY_INFO);
 		return modelAndView;
 	}
+
 	
-	
-	@PostMapping(value = Router.PATIENT_SAVE_INFO)
-	public ModelAndView saveOrUpdatePatientInfo(@Valid @ModelAttribute("patientInfo") PatientInfo info) {
-		
+
+	@PostMapping(value = Router.SPECIALITY_SAVE_INFO)
+	public ModelAndView saveSpecialityInfo(@Valid @ModelAttribute("specialityInfo") SpecialityInfo info) {
+		specialityService.saveOrUpdate(info);
 		ModelAndView modelAndView = new ModelAndView();
-		patientService.saveOrUpdate(info);
-		modelAndView.addObject("infos", patientService.getAll());
-		modelAndView.setViewName(PageInfo.PATIENT_INFO);
+		modelAndView.addObject("infos", specialityService.getAll(null));
+		modelAndView.setViewName(PageInfo.SPECIALITY_INFO);
 		return modelAndView;
 	}
-
 	
 	
-	
-	
-	
-
 }

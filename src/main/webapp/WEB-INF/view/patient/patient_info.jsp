@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <spring:message code=""/>
 <link href="${pageContext.request.contextPath}/css/select2.min.css" rel="stylesheet" media="screen">
 <div class="container-fluid">
@@ -19,13 +20,13 @@
 						<thead>
 							<tr>
 								<th class="align-center" style="width: 60px;">SL#</th>
-								<th class="align-center">PATIENT NAME</th>		
-								<th class="align-left">SUPPLIER NAME</th>
-								<th class="align-left" style="width: 135px;">CONTACT PERSON</th>
-								<th class="align-leftr" style="width: 135px;">DESIGNATION</th>
-								<th class="align-center" style="width: 100px;">MOBILE</th>
-								<th class="align-left" style="width: 100px;">EMAIL</th>
-								<th class="align-center" style="width: 100px;">STATUS</th>
+								<th class="align-left" style="width: 250px;">PATIENT NAME</th>		
+								<th class="align-left" style="width: 150px;">MOBILE NO.</th>
+								<th class="align-center" style="width: 150px;">DoB</th>
+								<th class="align-leftr" style="width: 135px;">GENDER</th>
+								<th class="align-center" style="width: 150px;">BLOOD GROUP</th>
+								<th class="align-left" style="width: 150px;">NATIONAL ID</th>
+								<th class="align-center" style="width: 50px;">AGE</th>
 								<th class="align-center" style="width: 80px;">ACTION</th>
 							</tr>
 						</thead>
@@ -33,36 +34,42 @@
 							<c:forEach var="info" items="${infos}" varStatus="counter">
 							<tr>
 								<td class="align-center">${counter.count}</td>
-								<td class="field_fuel_type align-center">${info.supplierCode}</td>
-								<td class="field_fuel_qty">${info.supplierName}</td>
-								<td class="field_fuel_expense">${info.contactPerson}</td>
-								<td class="field_fuel_load_date ">${info.designation}</td>
-								<td class="field_fuel_qty align-center">${info.mobile}</td>
-								<td class="field_fuel_expense">${info.email}</td>
-								<td class="field_fuel_load_date align-center">
-								<c:choose>
-									    <c:when test="${info.status =='Y'}">
-											<span class="badge bg-green">Active</span>
-									    </c:when>    
+								<td class="field_fuel_type align-left">${info.patientName}</td>
+								<td class="field_fuel_qty align-left">${info.mobileNo}</td>
+								<td class="field_fuel_expense align-center">
+								<fmt:formatDate var="dob" value="${info.dob}" pattern="dd.MM.yyyy"/>
+								${dob}</td>
+								<td class="field_fuel_load_date ">
+								  <c:choose>
+									    <c:when test="${info.genderId =='M'}">
+											<span class="badge bg-green">Male</span>
+									    </c:when> 
+									    <c:when test="${info.genderId =='F'}">
+											<span class="badge bg-green">Female</span>
+									    </c:when>   
 									    <c:otherwise>
-									        <span class="badge bg-red">Inactive</span>
+									        <span class="badge bg-red">Other</span>
 									    </c:otherwise>
 									</c:choose>
-								
 								</td>
+								<td class="field_fuel_expense align-center">${info.bloodGroup}</td>
+								<td class="field_fuel_expense align-left">${info.nid}</td>
+								
+								<td class="field_fuel_expense align-center">${info.age}</td>
 								<td class="align-center">
 									<input type="hidden" id="row_id" value="${info.id}">
-									<input type="hidden" id="f_supp_code" value="${info.supplierCode}">
-									<input type="hidden" id="f_supp_name" value="${info.supplierName}">
-									<input type="hidden" id="f_type_id" value="${info.supplierTypeId}">
+									<input type="hidden" id="f_name" value="${info.patientName}">
+									<input type="hidden" id="f_fname" value="${info.fatherName}">
+									<input type="hidden" id="f_mname" value="${info.motherName}">
+									<input type="hidden" id="f_mobile" value="${info.mobileNo}">
+									<fmt:formatDate var="dob" value="${info.dob}" pattern="yyyy-MM-dd"/>
+									<input type="hidden" id="f_dob" value="${dob}">
+									<input type="hidden" id="f_age" value="${info.age}">
+									<input type="hidden" id="f_gender" value="${info.genderId}">
+									<input type="hidden" id="f_blood_group" value="${info.bloodGroup}">
+									<input type="hidden" id="f_marital_status" value="${info.maritalStatus}">
+									<input type="hidden" id="f_nid" value="${info.nid}">
 									<input type="hidden" id="f_address" value="${info.address}">
-									<input type="hidden" id="f_person" value="${info.contactPerson}">
-									<input type="hidden" id="f_desig" value="${info.designation}">
-									<input type="hidden" id="f_phone" value="${info.phoneNumber}">
-									<input type="hidden" id="f_mobile" value="${info.mobile}">
-									<input type="hidden" id="f_email" value="${info.email}">
-									<input type="hidden" id="f_website" value="${info.website}">
-									<input type="hidden" id="f_status" value="${info.status}">
 									<a class="btn-edit btn btn-xs" onclick="edit(this)"><i class="material-icons">mode_edit</i></a>
 									
 								</td>
@@ -75,111 +82,118 @@
 		</div>
 	</div>
 	
-	<div class="modal fade" id="supplierInfoModal" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
+	<div class="modal fade" id="patientInfoModal" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
          <div class="modal-dialog modal-lg" role="document">
              <div class="modal-content">
                  <div class="modal-header bg-blue-grey">
                  	<button type="button" class="mod-cl close" data-dismiss="modal" aria-hidden="true">&times;</button>
                     <h4 class="modal-title align-center" id="defaultModalLabel">PATIENT INFORMATION</h4>
                  </div>
-                 <form method="post" id="supplierInfoForm" modelAttribute="supplierInfo">
+                 <form method="post" id="patientInfoForm" modelAttribute="patientInfo">
                  	<div class="modal-body">
                  		<div class="alert-code alert-block alert-danger hidden"></div><br>
                  		<input type="hidden" id="id" name="id" value=""/>
                  		<div class="row">
-	                 		<div class="col-md-6">
-                            	<span><b>SUPPLIER NAME :</b></span>
+	                 		<div class="col-md-4">
+                            	<span><b>PATIENT NAME :</b></span>
                             	<div class="form-group">
-	                                <input type="text" id="supplierName" name="supplierName" value="" class="form-control" placeholder="Supplier name"  autocomplete="off" required>
+	                                <input type="text" id="patientName" name="patientName" value="" class="form-control upper"   autocomplete="off" required>
                             	</div>
                             </div>
-	                 		<div class="col-md-6">
-                            	<span><b>SUPPLIER CODE :</b></span>
+                            <div class="col-md-4">
+                            	<span><b>FATHER'S NAME :</b></span>
                             	<div class="form-group">
-	                                <input type="text" id="supplierCode" maxlength="10" name="supplierCode" value="" class="form-control" placeholder="Supplier Code"  autocomplete="off" required>
+	                                <input type="text" id="fatherName" name="fatherName" value="" class="form-control upper"   autocomplete="off" required>
                             	</div>
                             </div>
-                            
-                 		</div>
-                 		<div class="row">
-	                 		<div class="col-md-6">
-                            	<span><b>SUPPLIER TYPE :</b></span>
+	                 		<div class="col-md-4">
+                            	<span><b>MOTHER'S NAME :</b></span>
                             	<div class="form-group">
-	                                <select  id=supplierTypeId name="supplierTypeId" class="js-example-theme-single form-control" style="width: 100%;" required="required" >
-			                        	<option></option>
-			                        <c:forEach var="info" items="${typeInfos}">
-			                           	<option value="${info.id }">${info.typeName}</option>
-			                        </c:forEach>
-			                        </select>
-                            	</div>
-                            </div>
-                            <div class="col-md-6">
-                            	<span><b>CONTACT PERSON :</b></span>
-                            	<div class="form-group">
-	                                <input type="text" id="contactPerson" name="contactPerson" value="" class="form-control" placeholder="Contact Person"  autocomplete="off">
+	                                <input type="text" id="motherName" maxlength="10" name="motherName" value="" class="form-control upper"   autocomplete="off" required>
                             	</div>
                             </div>
 	                 		
                             
                  		</div>
                  		<div class="row">
-                            <div class="col-md-12 m-t--10">
+                 		<div class="col-md-4">
+                            	<span><b>MOBILE NO :</b></span>
+                            	<div class="form-group">
+	                                <input type="text" id="mobileNo" maxlength="10" name="mobileNo" value="" class="form-control"   autocomplete="off" required>
+                            	</div>
+                            </div>
+                            <div class="col-md-4">
+                            	<span><b>DATE OF BIRTH :</b></span>
+                            	<div class="form-group">
+	                                <input type="text" id="dob" name="dob" value="" class="form-control"   autocomplete="off" required>
+                            	</div>
+                            </div>
+	                 		<div class="col-md-4">
+                            	<span><b>AGE :</b></span>
+                            	<div class="form-group">
+	                                <input type="text" id="age" maxlength="10" name="age" value="" class="form-control"   autocomplete="off" required>
+                            	</div>
+                            </div>
+	                 		
+                            
+                 		</div>
+                 		<div class="row">
+	                 		<div class="col-md-4">
+                            	<span><b>GENDER :</b></span>
+                            	<div class="form-group">
+	                                <select id="genderId" name="genderId" class="js-example-theme-single form-control" style="width: 100%;" required="required">
+		                        	<option value="">SELECT GENDER</option>
+		                        	<option value="M">MALE</option>
+		                        	<option value="F">FEMALE</option>
+		                        	
+		                        	</select>
+                            	</div>
+                            </div>
+	                 		<div class="col-md-4">
+                            	<span><b>BLOOD GROUP :</b></span>
+                            	<div class="form-group">
+	                                <select id="bloodGroup" name="bloodGroup" class="js-example-theme-single form-control" style="width: 100%;">
+			                        	<option value="">SELECT BLOOD GROUP</option>
+			                        	<option value="A+">A+</option>
+			                        	<option value="A-">A-</option>
+			                        	<option value="B+">B+</option>
+			                        	<option value="B-">B-</option>
+			                        	<option value="AB+">AB+</option>
+			                        	<option value="AB-">AB-</option>
+			                        	<option value="O+">O+</option>
+			                        	<option value="O-">O-</option>
+		                        	</select>
+                            	</div>
+                            </div>
+                            <div class="col-md-4">
+                            	<span><b>MARITAL STATUS :</b></span>
+                            	<div class="form-group">
+	                                <select id="maritalStatus" name="maritalStatus" class="js-example-theme-single form-control" style="width: 100%;" required="required">
+			                        	<option value="">SELECT MARITAL STATUS</option>
+			                        	<option value="1">UNMARRIED</option>
+			                        	<option value="2">MARRIED</option>
+		                        	</select>
+                            	</div>
+                            </div>
+                            
+                 		</div>
+                 		<div class="row">
+	                 		
+	                 		<div class="col-md-4">
+                            	<span><b>NATIONAL ID :</b></span>
+                            	<div class="form-group">
+	                                <input type="text" id="nid" maxlength="10" name="nid" value="" class="form-control"  autocomplete="off" required>
+                            	</div>
+                            </div>
+                            <div class="col-md-8">
                             	<span><b>ADDRESS :</b></span>
                             	<div class="form-group">
-                                	<textarea rows="4" id="address" name="address" class="form-control"  required="required"></textarea>
+                                	<textarea rows="4" id="address" name="address" class="form-control"></textarea>
                                 	
 	                            </div>
                             </div>
+                            
                  		</div>
-                 		<div class="row">
-	                 		
-                            <div class="col-md-6">
-                            	<span><b>DESIGNATION :</b></span>
-                            	<div class="form-group">
-	                                <input type="text" id="designation" name="designation" value="" class="form-control" placeholder="Designation"  autocomplete="off" >
-                            	</div>
-                            </div>
-                            <div class="col-md-6">
-                            	<span><b>MOBILE :</b></span>
-                            	<div class="form-group">
-	                                <input type="text" id="mobile" name="mobile" value="" class="form-control" placeholder="Mobile"  autocomplete="off" required>
-                            	</div>
-                            </div>
-                 		</div>
-                 		<div class="row">
-	                 		<div class="col-md-6">
-                            	<span><b>PHONE NUMBER :</b></span>
-                            	<div class="form-group">
-	                                <input type="text" id="phoneNumber" name="phoneNumber" value="" class="form-control" placeholder="Phone Number"  autocomplete="off">
-                            	</div>
-                            </div>
-                            <div class="col-md-6">
-                            	<span><b>EMAIL :</b></span>
-                            	<div class="form-group">
-	                                <input type="text" id="email" name="email" value="" class="form-control" placeholder="Email"  autocomplete="off">
-                            	</div>
-                            </div>
-                 		</div>
-                 		<div class="row">
-	                 		<div class="col-md-6">
-                            	<span><b>WEBSITE :</b></span>
-                            	<div class="form-group">
-	                                <input type="text" id="website" name="website" value="" class="form-control" placeholder="Email"  autocomplete="off">
-                            	</div>
-                            </div>
-                            <div class="col-md-6">
-                            	<span><b>ACTIVITY STATUS</b></span>
-                            	<div class="form-group">
-	                                <div class="demo-checkbox">
-									<input type="checkbox" id="activity_status" class="filled-in chk-col-green">
-									<label for="activity_status"><b><span class="check-status">Inactive ?</span></b></label>
-									<input type="hidden" id="status" name="status" value="N">
-								</div>
-                            	</div>
-                            </div>
-                 		</div>
-                 		
-                 		
                  		
                  		
 	                 </div>
@@ -246,6 +260,7 @@ input {
 }
 
 </style>
+<script src="${pageContext.request.contextPath}/js/bootstrap-datepicker.min.js"></script>
 <script src="${pageContext.request.contextPath}/js/select2.min.js"></script> 		
 <script src="${pageContext.request.contextPath}/js/pages/tables/jquery-datatable.js"></script>
 <script>
@@ -264,8 +279,7 @@ function chngLang(el){
 }
 $(".js-example-theme-single").select2({
 	 
-    theme: "classic",
-	placeholder: "Select Supplier Type from list.."
+    theme: "classic"
 });
  
 $(".modal-header").on("mousedown", function(mousedownEvt) {
@@ -287,19 +301,16 @@ $(".modal-header").on("mousedown", function(mousedownEvt) {
 });
 
 $(function() {
-    $('#supplierCode').keyup(function() {
+
+	$('.upper').keyup(function() {
         this.value = this.value.toUpperCase();
     });
-});
-
-$('#activity_status').change(function() {
-	if (this.checked) {
-		$('#status').val('Y');
-		$('.check-status').text('Active ?');
-	}else{
-		$('#status').val('N');
-		$('.check-status').text('Inactive ?');
-	}
+    
+    $( "#dob" ).datepicker({
+		format: "d-M-yyyy",
+        todayHighlight: true,
+        autoclose: true
+    });
 });
 
 
@@ -308,19 +319,19 @@ function add(el) {
 	
 	
 	$("#id").val("");
-	$("#supplierCode").val("");
-	$("#supplierName").val("");
-	$("#supplierTypeId").select2("val", "");
+	$("#patientName").val("");
+	$("#fatherName").val("");
+	$("#motherName").val("");
+	$("#mobileNo").val("");
+	$("#dob").val("");
+	$("#age").val("");
+	$("#genderId").select2("val", "");
+	$("#bloodGroup").select2("val", "");
+	$("#maritalStatus").select2("val", "");
+	$("#nid").val("");
 	$("#address").val("");
-	$("#contactPerson").val("");
-	$("#designation").val("");
-	$("#phoneNumber").val("");
-	$("#mobile").val("");
-	$("#email").val("");
-	$("#website").val("");
-	$("#activity_status").prop('checked', false);
-	$('#status').val('N'); 
-    $("#supplierInfoModal").modal();
+	
+	$("#patientInfoModal").modal();
     $(".modal-backdrop.fade.in").off("click");
     $(".modal").off("keydown");
     $(".alert").empty().addClass("hidden");
@@ -328,61 +339,55 @@ function add(el) {
 }
 
 function edit(el) {
+
 	
-	var Id = $(el).closest("tr").find("#row_id").val();
-	var supplierCode = $(el).closest("tr").find("#f_supp_code").val();
-	var supplierName = $(el).closest("tr").find("#f_supp_name").val();
-	var supplierTypeId = $(el).closest("tr").find("#f_type_id").val();
-	var address = $(el).closest("tr").find("#f_address").val();
-	var contactPerson=$(el).closest("tr").find("#f_person").val();
-	var designation=$(el).closest("tr").find("#f_desig").val();
-	var phoneNumber=$(el).closest("tr").find("#f_phone").val();
-	var mobile=$(el).closest("tr").find("#f_mobile").val();
-	var email=$(el).closest("tr").find("#f_email").val();
-	var website=$(el).closest("tr").find("#f_website").val();
-	var status = $(el).closest('tr').find("#f_status").val();
 	
-	$("#id").val(Id);
-	$("#supplierCode").val(supplierCode);
-	$("#supplierName").val(supplierName);
-	$("#supplierTypeId").select2("val", supplierTypeId);
-	//$("textarea#ExampleMessage").val(result.exampleMessage);
+	var id = $(el).closest("tr").find("#row_id").val();
+	var patientName = $(el).closest("tr").find("#f_name").val();
+	var fatherName = $(el).closest("tr").find("#f_fname").val();
+	var motherName = $(el).closest("tr").find("#f_mname").val();
+	var mobileNo = $(el).closest("tr").find("#f_mobile").val();
+	var dob=$(el).closest("tr").find("#f_dob").val();
+	var age=$(el).closest("tr").find("#f_age").val();
+	var genderId=$(el).closest("tr").find("#f_gender").val();
+	var bloodGroup=$(el).closest("tr").find("#f_blood_group").val();
+	var maritalStatus=$(el).closest("tr").find("#f_marital_status").val();
+	var nid=$(el).closest("tr").find("#f_nid").val();
+	var address = $(el).closest('tr').find("#f_address").val();
+	
+	$("#id").val(id);
+	$("#patientName").val(patientName);
+	$("#fatherName").val(fatherName);
+	$("#motherName").val(motherName);
+	$("#mobileNo").val(mobileNo);
+	$("#dob").val(convertMmDate(dob));
+	$("#age").val(age);
+	$("#genderId").select2("val", genderId);
+	$("#bloodGroup").select2("val", bloodGroup);
+	$("#maritalStatus").select2("val", maritalStatus);
+	$("#nid").val(nid);
 	$("#address").val(address);
-	$("#contactPerson").val(contactPerson);
-	$("#designation").val(designation);
-	$("#phoneNumber").val(phoneNumber);
-	$("#mobile").val(mobile);
-	$("#email").val(email);
-	$("#website").val(website);
-	if(status == 'Y'){
-		$('#activity_status').prop('checked', true);
-		$('#status').val('Y');
-		$('.check-status').text('Active');
-	}else{
-		$('#activity_status').prop('checked', false);
-		$('#status').val('N');
-		$('.check-status').text('Inactive');
-	}
 	
-	$("#supplierInfoModal").modal();
+	
+	$("#patientInfoModal").modal();
     $(".modal-backdrop.fade.in").off("click");
     $(".modal").off("keydown");
     $(".alert").empty().addClass("hidden");
     $(".alert-code").empty().addClass("hidden");
 };
 
-$("#supplierInfoForm").submit(function(event){
+$("#patientInfoForm").submit(function(event){
 	event.preventDefault();				
-    var formData = $("#supplierInfoForm").serialize();
+    var formData = $("#patientInfoForm").serialize();
     
     if($(".alert-code").hasClass('hidden')){
     	$.ajax({	
-	    	url : "${pageContext.request.contextPath}/supplier/save-suppliers",
+	    	url : "${pageContext.request.contextPath}/patient/save-patient-info",
 	        type: 'POST',
 	        data: formData,
 	        async: false,
 	        success: function (data) {				 
-	        	$("#supplierInfoModal").modal('hide');
+	        	$("#patientInfoModal").modal('hide');
 				$('.modal-backdrop').remove();
 				$("#view_page").html(data);
 				sweetAlert("Saved!", "Your data has been Saved.", "success", 1000, false);

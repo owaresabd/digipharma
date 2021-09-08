@@ -13,6 +13,8 @@ public class PageInfo {
 	
 	public static final String TEST_INFO = "test/test_info";
 	public static final String PATIENT_INFO = "patient/patient_info";
+	public static final String SPECIALITY_INFO = "setup/speciality_info";
+	public static final String DOCTOR_INFO = "setup/doctor_info";
 	
 
 }
