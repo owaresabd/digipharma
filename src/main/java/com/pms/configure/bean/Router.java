@@ -11,6 +11,10 @@ public class Router {
 	public static final String ITEM_TYPE_LIST_INFO = "/maintain";
 	public static final String ITEM_TYPE_SAVE_INFO = "/save-item-type";
 	
+	public static final String ROOT_PATH_EXPENSE_TYPE_INFO = "/expense_type";
+	public static final String EXPENSE_TYPE_LIST_INFO = "/maintain";
+	public static final String EXPENSE_TYPE_SAVE_INFO = "/save-expense-type";
+	
 	public static final String ROOT_PATH_ITEM_INFO = "/item";
 	public static final String ITEM_LIST_INFO = "/maintain";
 	public static final String ITEM_SAVE_INFO = "/save-item-info";
