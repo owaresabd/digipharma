@@ -50,11 +50,11 @@
 									
 									<input type="hidden" id="s_item_name" value="${info.itemName}">
 									<input type="hidden" id="s_item_code" value="${info.itemCode}">
-									<input type="hidden" id="s_type_id" value="${info.typeId}">
-									<input type="hidden" id="s_generic_id" value="${info.genericId}">
-									<input type="hidden" id="s_manufacturer_id" value="${info.manufacturerId}">
-									<input type="hidden" id="s_country_id" value="${info.countryId}">
-									<input type="hidden" id="s_unit_id" value="${info.unitId}">
+									<input type="hidden" id="s_type_id" value="${info.itemTypeInfo.id}">
+									<input type="hidden" id="s_generic_id" value="${info.genericInfo.id}">
+									<input type="hidden" id="s_manufacturer_id" value="${info.manufacturerInfo.id}">
+									<input type="hidden" id="s_country_id" value="${info.countryInfo.id}">
+									<input type="hidden" id="s_unit_id" value="${info.unitInfo.id}">
 									<input type="hidden" id="s_purchase_price" value="${info.purchasePrice}">
 									<input type="hidden" id="s_sales_price" value="${info.salesPrice}">
 									<input type="hidden" id="s_rack_no" value="${info.rackNo}">
