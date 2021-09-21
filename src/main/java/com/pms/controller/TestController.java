@@ -57,6 +57,8 @@ public class TestController {
 		GsonBuilder gson = new GsonBuilder();
 		Gson g = gson.create();
 		Optional<TestInfo> info = testService.findById(id);
+		
+		System.out.println(info.get().getTestName());
 		return g.toJson(info);
 	}
 

@@ -72,6 +72,20 @@
                  		</div>
                  		
                  		<div class="row">
+                 		<div class="col-md-4">
+                            	<span><b>TEST NAME</b></span>
+                               	<div class="form-group">
+	                                 <select  id=testId name="testId" class="js-example-theme-single form-control" >
+			                        	<option></option>
+			                        <c:forEach var="info" items="${testInfos}">
+			                           	<option value="${info.id }">${info.testName}</option>
+			                        </c:forEach>
+			                        </select>
+	                             </div>
+                            </div>
+                 		</div>
+                 		
+                 		<div class="row">
                  		
                  			<div class="panel panel-col-teal">
 														
@@ -92,12 +106,7 @@
 								<tr>
 									<th class="align-center">
 										 <div class="form-group">
-	                                <select  id=testId name="testId" class="js-example-theme-single form-control" style="width: 100%;" required="required" >
-			                        	<option></option>
-			                        <c:forEach var="info" items="${testInfos}">
-			                           	<option value="${info.id }">${info.testName}</option>
-			                        </c:forEach>
-			                        </select>
+	                                 <input class="form-control dates" id="po_date" name="poDate" value="" autocomplete="off"/>
                             	</div>
 									</th>
 									<th class="align-center">
@@ -306,8 +315,7 @@ input {
 }
 </style>
 <script src="${pageContext.request.contextPath}/js/select2.min.js"></script>
-<script
-	src="${pageContext.request.contextPath}/js/pages/tables/jquery-datatable.js"></script>
+<script src="${pageContext.request.contextPath}/js/pages/tables/jquery-datatable.js"></script>
 <script>
 	function chngLang(el) {
 		var link = $(el).attr('id');
@@ -324,8 +332,7 @@ input {
 	}
 	$(".js-example-theme-single").select2({
 
-		theme : "classic",
-		placeholder : "Select Supplier Type from list.."
+		theme : "classic"
 	});
 
 	$(".modal-header")
@@ -360,9 +367,15 @@ input {
 
 	$("#testId").on('change', function() {
 		var id = $('option:selected', this).val();
-		
-		itemInfoById(id);
+		$.get( "${pageContext.request.contextPath}/test/" + id, 
+		function( data ) {
+			console.log(data[0].testCode);
+			
+			
+		});
 	});
+
+	
 
 	$('#activity_status').change(function() {
 		if (this.checked) {
@@ -373,7 +386,27 @@ input {
 			$('.check-status').text('Inactive ?');
 		}
 	});
-
+	function getTestById(id){
+		$.ajax({
+			type : "GET",
+			url : "${pageContext.request.contextPath}/itemIssue/itemInfoById?itemId=" + id,
+			dataType : 'json',
+			success : function(data) {
+				for(var i=0; i<data.length; i++){
+					var price = data[i].unitPrice;
+					var uomId = data[i].uomNo;
+					var uomName = data[i].uomName;
+					var batchRequired = data[i].batchRequired;
+					var expireable = data[i].expireable;
+					
+					$("#uom_id").val(uomId);
+					$("#uom_name").val(uomName);
+					$('#uom_list').val(uomId).trigger('change.select2');
+					
+				}
+			}
+		});
+	}
 	function add(el) {
 
 		$("#id").val("");
