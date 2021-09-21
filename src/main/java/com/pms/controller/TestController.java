@@ -1,6 +1,6 @@
 package com.pms.controller;
 
-import java.util.Optional;
+import java.util.List;
 import java.util.UUID;
 
 import javax.validation.Valid;
@@ -56,9 +56,7 @@ public class TestController {
 	public String getItemInfos(@PathVariable("id") UUID id) {
 		GsonBuilder gson = new GsonBuilder();
 		Gson g = gson.create();
-		Optional<TestInfo> info = testService.findById(id);
-		
-		System.out.println(info.get().getTestName());
+		List<TestInfo> info = testService.findById(id);
 		return g.toJson(info);
 	}
 

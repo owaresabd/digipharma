@@ -367,12 +367,22 @@ input {
 
 	$("#testId").on('change', function() {
 		var id = $('option:selected', this).val();
-		$.get( "${pageContext.request.contextPath}/test/" + id, 
-		function( data ) {
-			console.log(data[0].testCode);
-			
-			
-		});
+		$.ajax({
+					type : "GET",
+					url : "${pageContext.request.contextPath}/test/" + id,
+					dataType : 'json',
+					success : function(data) {
+						
+						for(var i=0; i<data.length; i++){
+							console.log(data[i].testCode);
+							
+							
+							
+							
+							
+						}
+					}
+				});
 	});
 
 	
@@ -386,27 +396,7 @@ input {
 			$('.check-status').text('Inactive ?');
 		}
 	});
-	function getTestById(id){
-		$.ajax({
-			type : "GET",
-			url : "${pageContext.request.contextPath}/itemIssue/itemInfoById?itemId=" + id,
-			dataType : 'json',
-			success : function(data) {
-				for(var i=0; i<data.length; i++){
-					var price = data[i].unitPrice;
-					var uomId = data[i].uomNo;
-					var uomName = data[i].uomName;
-					var batchRequired = data[i].batchRequired;
-					var expireable = data[i].expireable;
-					
-					$("#uom_id").val(uomId);
-					$("#uom_name").val(uomName);
-					$('#uom_list').val(uomId).trigger('change.select2');
-					
-				}
-			}
-		});
-	}
+	
 	function add(el) {
 
 		$("#id").val("");

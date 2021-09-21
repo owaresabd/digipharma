@@ -40,9 +40,9 @@ public class TestService {
 		}
 	}
 
-	 public Optional<TestInfo> findById(UUID id) {
+	 public List<TestInfo> findById(UUID id) {
 
-	    return testRepository.findById(id);
+	    return testRepository.findById(id).stream().collect(Collectors.toList());
 	}
 
 	public void saveOrUpdate(TestInfo info) {
