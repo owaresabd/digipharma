@@ -44,10 +44,11 @@ public class Router {
 	public static final String ROOT_PATH_TEST_INFO = "/test";
 	public static final String TEST_LIST_INFO = "/maintain";
 	public static final String TEST_SAVE_INFO = "/save-test-info";
+	public static final String INFO_BY_ID = "/{id}";
 	
 	public static final String ROOT_PATH_PATIENT_INFO = "/patient";
 	public static final String PATIENT_LIST_INFO = "/maintain";
-	public static final String PATIENT_SAVE_INFO = "/save-patient-info";
+	public static final String PATIENT_SAVE_INFO = "/save-doctor-info";
 	
 	public static final String ROOT_PATH_SPECIALITY_INFO = "/speciality";
 	public static final String SPECIALITY_LIST_INFO = "/maintain";
@@ -56,5 +57,11 @@ public class Router {
 	public static final String ROOT_PATH_DOCTOR_INFO = "/doctor";
 	public static final String DOCTOR_LIST_INFO = "/maintain";
 	public static final String DOCTOR_SAVE_INFO = "/save-doctor-info";
+	
+	
+	public static final String ROOT_PATH_INVOICE_INFO = "/invoice";
+	public static final String INVOICE_ENTRY_INFO = "/entry";
+	public static final String INVOICE_LIST_INFO = "/maintain";
+	public static final String INVOICE_SAVE_INFO = "/save-doctor-info";
 
 }

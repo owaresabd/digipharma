@@ -1,6 +1,5 @@
 package com.pms.model;
 
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
@@ -51,14 +50,12 @@ public class DoctorInfo {
 	private SpecialityInfo specialityInfo;
 
 
-	@Column(name = "primary_consult_fee",precision=10, scale=2,nullable = true)
-	private BigDecimal primaryConsultFee;
+	@Column(name = "primary_consult_fee",nullable = true)
+	private String primaryConsultFee;
 	
-	@Column(name = "followup_consult_fee",precision=10, scale=2,nullable = true)
-	private BigDecimal followupConsultFee;
+	@Column(name = "followup_consult_fee",nullable = true)
+	private String followupConsultFee;
 	
-	
-
 	@Column(name = "status")
 	private String status;
 	
@@ -138,20 +135,19 @@ public class DoctorInfo {
 	}
 
 	
-
-	public BigDecimal getPrimaryConsultFee() {
+	public String getPrimaryConsultFee() {
 		return primaryConsultFee;
 	}
 
-	public void setPrimaryConsultFee(BigDecimal primaryConsultFee) {
+	public void setPrimaryConsultFee(String primaryConsultFee) {
 		this.primaryConsultFee = primaryConsultFee;
 	}
 
-	public BigDecimal getFollowupConsultFee() {
+	public String getFollowupConsultFee() {
 		return followupConsultFee;
 	}
 
-	public void setFollowupConsultFee(BigDecimal followupConsultFee) {
+	public void setFollowupConsultFee(String followupConsultFee) {
 		this.followupConsultFee = followupConsultFee;
 	}
 

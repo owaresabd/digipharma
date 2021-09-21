@@ -14,20 +14,32 @@ import com.pms.configure.bean.Router;
 import com.pms.model.SupplierInfo;
 import com.pms.service.SupplierService;
 import com.pms.service.SupplierTypeService;
+import com.pms.service.TestService;
 
 
 
 @Controller
-@RequestMapping(Router.ROOT_PATH_PURCHASE_INFO)
-public class PurchaseController {
+@RequestMapping(Router.ROOT_PATH_INVOICE_INFO)
+public class InvoiceController {
 	
 	@Autowired
 	private SupplierTypeService supplierTypeService;
 	@Autowired
 	private SupplierService supplierService;
+	@Autowired
+	private TestService testService;
 
-	@GetMapping(Router.PURCHASE_ITEM_INFO)
-	public ModelAndView puchaseItem() {
+	
+	@GetMapping(Router.INVOICE_ENTRY_INFO)
+	public ModelAndView invoiceEntry() {
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.addObject("invoiceNo", ("INV-"+System.currentTimeMillis()));
+		modelAndView.addObject("testInfos", testService.getAll("Y"));
+		modelAndView.setViewName("pms/billing/invoice_info");
+		return modelAndView;
+	}
+	@GetMapping(Router.INVOICE_LIST_INFO)
+	public ModelAndView invoiceList() {
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.addObject("poNo", ("P"+System.currentTimeMillis()));
 		modelAndView.addObject("infos", supplierService.getAll(null));
@@ -36,18 +48,7 @@ public class PurchaseController {
 		return modelAndView;
 	}
 	
-	@GetMapping(Router.PURCHASE_LIST_INFO)
-	public ModelAndView puchaseList() {
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.addObject("poNo", System.currentTimeMillis());
-		modelAndView.addObject("infos", supplierService.getAll(null));
-		modelAndView.addObject("typeInfos", supplierTypeService.getAll("Y"));
-		modelAndView.setViewName("transaction/purchase_list");
-		return modelAndView;
-	}
-
 	
-
 	@PostMapping(value = Router.PURCHASE_SAVE_INFO)
 	public String saveSuppliers(@Valid @ModelAttribute("supplierInfo") SupplierInfo supplierInfo) {
 		supplierService.saveOrUpdate(supplierInfo);

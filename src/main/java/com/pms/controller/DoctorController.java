@@ -13,7 +13,10 @@ import org.springframework.web.servlet.ModelAndView;
 import com.pms.configure.bean.PageInfo;
 import com.pms.configure.bean.Router;
 import com.pms.model.DoctorInfo;
+import com.pms.service.DepartmentService;
+import com.pms.service.DesignationService;
 import com.pms.service.DoctorService;
+import com.pms.service.SpecialityService;
 
 
 
@@ -24,22 +27,37 @@ public class DoctorController {
 	@Autowired
 	private DoctorService doctorService;
 	
+	@Autowired
+	private DesignationService designationService;
+	
+	@Autowired
+	private DepartmentService departmentService;
+	
+	@Autowired
+	private SpecialityService specialityService;
+	
 	@GetMapping(Router.DOCTOR_LIST_INFO)
 	public ModelAndView maintain() {
 		ModelAndView modelAndView = new ModelAndView();
 		
-		modelAndView.addObject("infos", doctorService.getAll(null));
+	    modelAndView.addObject("infos", doctorService.getAll(null));
+	    modelAndView.addObject("designationInfos", designationService.getAll("Y"));
+	    modelAndView.addObject("departmentInfos", departmentService.getAll("Y"));
+	    modelAndView.addObject("specialityInfos", specialityService.getAll("Y"));
 		modelAndView.setViewName(PageInfo.DOCTOR_INFO);
 		return modelAndView;
 	}
 	
 	
 	@PostMapping(value = Router.PATIENT_SAVE_INFO)
-	public ModelAndView saveOrUpdateDoctorInfo(@Valid @ModelAttribute("patientInfo") DoctorInfo info) {
+	public ModelAndView saveOrUpdateDoctorInfo(@Valid @ModelAttribute("doctorInfo") DoctorInfo info) {
 		
 		ModelAndView modelAndView = new ModelAndView();
 		doctorService.saveOrUpdate(info);
-		modelAndView.addObject("infos", doctorService.getAll(null));
+		 modelAndView.addObject("infos", doctorService.getAll(null));
+		 modelAndView.addObject("designationInfos", designationService.getAll("Y"));
+		 modelAndView.addObject("departmentInfos", departmentService.getAll("Y"));
+		 modelAndView.addObject("specialityInfos", specialityService.getAll("Y"));
 		modelAndView.setViewName(PageInfo.DOCTOR_INFO);
 		return modelAndView;
 	}

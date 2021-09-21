@@ -2,6 +2,8 @@ package com.pms.service;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 import javax.transaction.Transactional;
@@ -38,7 +40,10 @@ public class TestService {
 		}
 	}
 
-	
+	 public Optional<TestInfo> findById(UUID id) {
+
+	    return testRepository.findById(id);
+	}
 
 	public void saveOrUpdate(TestInfo info) {
 		User user = userService.getCurrentUser();
