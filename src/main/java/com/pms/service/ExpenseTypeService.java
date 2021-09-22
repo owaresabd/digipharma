@@ -18,6 +18,7 @@ import com.pms.repository.ExpenseTypeRepository;
 public class ExpenseTypeService {
 	@Autowired
 	private IUserService userService;
+	
 	@Autowired
 	private ExpenseTypeRepository expenseTypeRepository;
 

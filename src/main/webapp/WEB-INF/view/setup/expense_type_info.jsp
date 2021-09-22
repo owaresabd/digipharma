@@ -204,11 +204,11 @@ function add(el) {
 }
 
 function edit(el) {
-	var Id = $(el).closest("tr").find("#row_id").val();
+	var id = $(el).closest("tr").find("#row_id").val();
 	var typeName = $(el).closest("tr").find("#s_name").val();
 	var status = $(el).closest('tr').find("#s_status").val();
 	
-	$("#id").val(Id);
+	$("#id").val(id);
 	$("#typeName").val(typeName);
 	
 	if(status == 'Y'){
